@@ -22,6 +22,12 @@ image campb1 = "maps/4.png"
 image campb1_hover = "maps/4_hover.png"
 image bosquesoleado = "maps/6.png"
 image bosquesoleado_hover = "maps/6_hover.png"
+image bosquesombreado = "maps/7.png"
+image bosquesombreado_hover = "maps/7_hover.png"
+image bosquesombreadost = "maps/7b.png"
+image bosquesombreadost_hover = "maps/7b_hover.png"
+image playa = "maps/8.png"
+image playa_hover = "maps/8_hover.png"
 
 image side nikki = "characters/nikki.png"
 image el general = "characters/el general.png"
@@ -187,9 +193,6 @@ screen campb1:
         hotspot (1069, 625, 222, 372) clicked Jump("pablo1")
         hotspot (1530, 817, 388, 197) clicked Jump("campc1") hovered Play("sound", "audio/sfx/pasos 2.ogg")
 
-
-
-
 screen bosquesoleado1:
     imagemap:
         ground "bosquesoleado"
@@ -204,19 +207,29 @@ screen bosquesoleado1:
 
 screen bosquesombreadoct:
     imagemap:
-        ground "bosque sombreado con toby muerto.png"
-        hover "bosque sombreado con toby muerto hover.png"
+        ground "bosquesombreado"
+        hover "bosquesombreado_hover"
         
-        hotspot (35, 480, 145, 145) clicked Jump("playa")
+        hotspot (0, 0, 735, 690) clicked Jump("playa1")
+        hotspot (912, 850, 313, 236) clicked Jump("bosquesoleado1")
+        hotspot (1097, 477, 365, 308) clicked Jump("zorromuerto")
 
 screen bosquesombreadost:
     imagemap:
-        ground "bosque sombreado sin toby muerto.png"
-        hover "bosque sombreado sin toby muerto hover.png"
+        ground "bosquesombreadost"
+        hover "bosquesombreadost_hover"
         
-        hotspot (35, 480, 145, 145) clicked Jump("playa")
+        hotspot (0, 0, 735, 690) clicked Jump("playa1")
+        hotspot (912, 850, 313, 236) clicked Jump("bosquesoleado1")
 
-
+screen playa1:
+    imagemap:
+        ground "playa"
+        hover "playa_hover"
+        
+        hotspot (0, 670, 449, 406) clicked Jump("pescar")
+        hotspot (622, 51, 848, 920) clicked Jump("carpaluna1")
+        hotspot (1494, 870, 425, 208) clicked Jump("bosquesombreado")
 
 
 label start:
@@ -530,7 +543,7 @@ label bosquesombreado:
             call screen bosquesombreadost
     
     else: 
-        scene bosque sombreado
+        scene bosquesombreado
         show toby with dissolve
 
         preg "Por... favor... Ayuda.. me..."
@@ -733,12 +746,24 @@ label heriratoby:
     jump bosquesombreado
     # Finaliza el juego:
 
-label playa:
+label zorromuerto:
+    scene bosquesombreado
+    "Un zorro muerto."
+    jump bosquesombreado
+
+label playa1:
+    call screen playa1
+
+label pescar:
     scene playa
-    "*vas a la playa*"
+    "Todavia no lo hice"
+    jump playa1
 
-    return
+label carpaluna1:
+    scene playa
+    "Todavia no lo hice"
+    jump playa1
 
-    
+
     # This ends the game.
     return
