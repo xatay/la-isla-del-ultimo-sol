@@ -261,7 +261,7 @@ label start:
 
     scene black
     window hide
-    show text "{font=Birthlong.ttf}{size=50}Hace tres meses que llegué a esta isla...{/size}{/font}" at truecenter with fade
+    show text "{font=Inclitodo.ttf}{size=50}{color=#ffffff}Hace tres meses que llegué a esta isla...{/color}{/size}{/font}" at truecenter with fade
     $ renpy.pause() 
 
     # Fade out text
@@ -272,7 +272,7 @@ label start:
     show animation_luna at move_across zorder 10
     with dissolve
 
-    show text "{font=Birthlong.ttf}{size=100}{vspace=750}La Isla del Ultimo Sol{/size}{/font}"
+    show text "{font=Inclitodo.ttf}{size=100}{color=#ffffff}{vspace=750}La Isla del Último Sol{/color}{/size}{/font}"
     $ renpy.pause() 
 
     hide animation_sol with dissolve
@@ -471,7 +471,7 @@ label felipe1:
         tf "¡Soldado! ¡No es apropiado hacer esperar a un General!"
         n "Perdón, señor"
         tf "¡Pase ya, y no lo haga esperar más!"
-        tf "{size=10}Mocoso insolente...{/size}"
+        tf "{size=30}Mocoso insolente...{/size}"
         hide teniente felipe with dissolve
         jump andaapescarpibe
 
