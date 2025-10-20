@@ -99,6 +99,7 @@ screen say(who, what):
 
     window:
         id "window"
+        background Solid("#4444ff88")
 
         if who is not None:
 
@@ -107,7 +108,7 @@ screen say(who, what):
                 style "namebox"
                 text who id "who"
 
-        text what id "what"
+        text what id "what" xmaximum 1100
 
 
     ## If there's a side image, display it above the text. Do not display on

@@ -11,6 +11,7 @@ define f = Character("Flor")
 define b = Character("Betty")
 define pb = Character("Pablo")
 define tr = Character("Teniente Rosa")
+define l = Character("Luna")
 
 image black = "solid colors/black.png"
 image home1 = "maps/1.png"
@@ -34,6 +35,8 @@ image playa = "maps/8.png"
 image playa_hover = "maps/8_hover.png"
 image carpageneral1 = "maps/9.png"
 image carpageneral1_hover = "maps/9_hover.png"
+image carpaluna1 = "maps/10.png"
+image carpaluna1_hover = "maps/10_hover.png"
 
 image side nikki = "characters/nikki.png"
 image el general = "characters/el general.png"
@@ -46,12 +49,14 @@ image flor = "characters/flor.png"
 image betty = "characters/betty.png"
 image pablo = "characters/pablo.png"
 image teniente rosa = "characters/teniente rosa.png"
+image luna = "characters/luna.png"
 
 image bgcampa1 = "backgrounds/3.png"
 image bgcampb1 = "backgrounds/4.png"
 image bgcampc1 = "backgrounds/5.png"
 image bgcarpageneral = "backgrounds/9.png"
 image bgbosquesoleado = "backgrounds/6.png"
+image bgcarpaluna = "backgrounds/10.png"
 
 image conejito de mimbre = "objects/conejito_de_mimbre.png"
 image cania = "objects/cania.png"
@@ -249,6 +254,12 @@ screen playa1:
         hotspot (622, 51, 848, 920) clicked Jump("carpaluna1")
         hotspot (1494, 870, 425, 208) clicked Jump("bosquesombreado")
 
+screen carpaluna1:
+    imagemap:
+        ground "carpaluna1"
+        hover "carpaluna1_hover"
+        
+        hotspot (776, 241, 345, 520) clicked Jump("luna1")
 
 label start:
     $ items = [] 
@@ -258,6 +269,8 @@ label start:
     $ pedirElBalde = False
     $ tobyNombre = False
     $ tobyMuerto = False
+    $ preguntasluna = 0
+    $ lunaNombre = False
 
     scene black
     window hide
@@ -305,7 +318,7 @@ menu iroexplorar:
     "Si, señor.":
         n "Si, señor."
         hide teniente felipe with dissolve
-        jump campc1
+        jump andaapescarpibe
 
     "Debo atender otros asuntos, señor.":
         n "Debo atender otros asuntos, señor."
@@ -471,7 +484,7 @@ label felipe1:
         tf "¡Soldado! ¡No es apropiado hacer esperar a un General!"
         n "Perdón, señor"
         tf "¡Pase ya, y no lo haga esperar más!"
-        tf "{size=30}Mocoso insolente...{/size}"
+        tf "{size=35}Mocoso insolente...{/size}"
         hide teniente felipe with dissolve
         jump andaapescarpibe
 
@@ -818,11 +831,77 @@ label pescar:
     jump playa1
 
 label carpaluna1:
-    scene playa
-    "Qué extraño, eso no estaba ahí antes, debería investigarlo..."
-    "Todavia no lo hice"
-    jump playa1
+    $ renpy.save("quick_save")
+    call screen carpaluna1
 
+label luna1:
+    scene bgcarpaluna
+    show luna with dissolve
+    preg "Ha llegado aquel que podría ser, cuyo destino no es suyo, sino que está en manos de otro ser."
+    preg "Pero ¿cuál camino será el que te harán caminar?"
+    preg "¿Qué hilos tensarán?¿Qué final esta historia te presentará?"
+
+    jump preguntasluna
+
+menu preguntasluna:
+    "¿Quién sos?":
+        jump pregluna1
+
+    "¿Qué haces acá?":
+        jump pregluna2
+
+    "¿Cómo llegaste acá?":
+        jump pregluna3
+
+label pregluna1:
+    n "¿Quién sos?"
+    preg "Muchos nombres posee aquella que el velo ve, de lenguas impronunciables"
+    preg "Pero que la proveedora de argenta luz en la noche aclare cualquier duda de mi ser"
+    n "Eso me genera más dudas, en realidad"
+    n "Te llamaré Luna"
+    $ lunaNombre = True
+    $ preguntasluna += 1
+    if preguntasluna >= 3:
+        jump luna2
+    else:
+        jump preguntasluna
+
+label pregluna2:
+    n "¿Qué haces acá?"
+    if lunaNombre:
+        l "Los porqué o los dónde son dispensables dudas en tu camino hacia mí, importa el ahora"
+        l "Y ahora nos encontramos para que tu destino deje se ser un solo camino."
+    else:
+        preg "Los porqué o los dónde son dispensables dudas en tu camino hacia mí, importa el ahora"
+        preg "Y ahora nos encontramos para que tu destino deje se ser un solo camino."
+    $ preguntasluna += 1
+    if preguntasluna >= 3:
+        jump luna2
+    else:
+        jump preguntasluna
+
+label pregluna3:
+    n "¿Cómo llegaste acá? Hace un momento esta playa estaba vacía."
+    if lunaNombre:
+        l "No hay /“acá/” o /“allá/”, el todo no está más que ligeramente sostenido por cuestiones ligadas al ser que las percibe"
+        l "Si tu hoy y tu ayer fueron iguales, entonces ¿por qué importaría darles diferencia?"
+    else:
+        preg "No hay /“acá/” o /“allá/”, el todo no está más que ligeramente sostenido por cuestiones ligadas al ser que las percibe"
+        preg "Si tu hoy y tu ayer fueron iguales, entonces ¿por qué importaría darles diferencia?"
+    $ preguntasluna += 1
+    if preguntasluna >= 3:
+        jump luna2
+    else:
+        jump preguntasluna
+
+label luna2:
+    l "Tus demás dudas deberán quedar en el aire me temo, pues el tiempo, aunque imperceptible, nos es desfavorable."
+    l "No quedará nada de esta tierra luego de cumplir su sentencia."
+    l "El despiadado cosmos engañará nuestros ojos, la tierra temblará y rugirá."
+    l "Nada de este impuro suelo quedará..."
+    l "Y tú, Nikki, tienes una decisión que tomar, abre tu mente y divide tus caminos."
+    l "Oh, aquel que será, acércate y toma una carta! Construye tu potencial, liberate y construye tu futuro!"
+    n "¿Cómo sabes mi nombre?"
 
     # This ends the game.
     return
