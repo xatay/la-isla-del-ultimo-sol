@@ -265,6 +265,7 @@ label start:
     $ items = [] 
     $ evento1 = False
     $ evento2 = False
+    $ evento3 = False
     $ felipeOrden = True
     $ pedirElBalde = False
     $ tobyNombre = False
@@ -831,7 +832,10 @@ label pescar:
     jump playa1
 
 label carpaluna1:
-    $ renpy.save("quick_save")
+    if evento3:
+        scene bgcarpaluna
+        n "Debo volver al campamento rápido."
+        jump playa1
     call screen carpaluna1
 
 label luna1:
@@ -902,6 +906,47 @@ label luna2:
     l "Y tú, Nikki, tienes una decisión que tomar, abre tu mente y divide tus caminos."
     l "Oh, aquel que será, acércate y toma una carta! Construye tu potencial, liberate y construye tu futuro!"
     n "¿Cómo sabes mi nombre?"
+
+    play movie "video/luna.webm"
+
+    if carta == 'torre':
+        play movie "video/carta_torre.webm"
+        show image "animations/carta_torre.png" zorder 5
+        l "En un solitario camino has sellado tu destino, tu falta se nota. Lavaste tus manos, tu piel y pelaje limpios a simple vista pero, ¿lo estas?"
+        l "¿Tiene salvación tu alma?, no es algo que pueda responder, pero tal vez…"
+        l "Muestra tu valor, aquel quien avanza en piezas, encuéntrate y reúne tus faltas, solo ahí descubriremos los vacíos que cargas, tal vez esta tierra así pueda ser salvada."
+        l "Nada más se te revelará en este encuentro, pero si así nos encontramos, así nuevamente nos cruzaremos, confía en que los hilos incitarán a cruzarnos otra vez."
+        $ evento3 = True
+        jump carpaluna1
+    else:
+        if carta == 'muerte':
+            play movie "video/carta_muerte.webm"
+            show image "animations/carta_muerte.png" zorder 5
+            l "Veo un proceso que inicia, pero falta el más importante paso ¿Qué tempo irás marcando?"
+            l "Aquel que cambio trae, no olvides que tus acciones consecuencias tienen, que tú caos no te frene."
+            $ evento3 = True
+            jump carpaluna1
+        else:
+            if carta == 'diablo':
+                play movie "video/carta_diablo.webm"
+                show image "animations/carta_diablo.png" zorder 5
+                l "En tu alma se cierne un oscuro paso, que con tempo lento avanza sin descanso, mientras te corta caminos y endurece tu alma condenada"
+                l "Tal vez te falta esperanza, tal vez pensás que nada te falta, solo vos sabés que falla, pero, ¿Podrás acaso enmendar lo rasgado?"
+                l "¿Tiene salvación tu contaminado corazón?"
+                l "Nada más se te revelará en este encuentro, pero si  así nos encontramos, así nuevamente nos cruzaremos, confía en que los hilos incitarán a cruzarnos otra vez."
+                $ evento3 = True
+                jump carpaluna1
+            else:
+                if carta == 'carro':
+                    show image "animations/carta_carro.png" zorder 5
+                    l "A favor tuyo se encuentra el mundo, tu constancia y la pureza de tu alma traen luz a tu paso al avanzar."
+                    l "El ocio y la indistinción son tus enemigos más notables, no concedas sus maliciosos deseos."
+                    l "Ahora retírate, aquel cuyo camino existe en piezas, ve a juntarlas para por fin ver a dónde te llevan."
+                    l "Si así nos encontramos, así nuevamente nos cruzaremos, confía en que los hilos incitarán a cruzarnos otra vez."
+                    $ evento3 = True
+                    jump carpaluna1
+        
+
 
     # This ends the game.
     return

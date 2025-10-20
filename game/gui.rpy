@@ -66,7 +66,7 @@ define gui.name_text_font = "Hynings.ttf"
 define gui.interface_text_font = "Inclitodo.ttf"
 
 ## The size of normal dialogue text.
-define gui.text_size = 55
+define gui.text_size = 45
 
 ## The size of character names.
 define gui.name_text_size = 55
@@ -134,7 +134,7 @@ define gui.dialogue_xpos = 402
 define gui.dialogue_ypos = 70
 
 ## The maximum width of dialogue text, in pixels.
-define gui.dialogue_width = 1500
+define gui.dialogue_width = 1400
 
 ## The horizontal alignment of the dialogue text. This can be 0.0 for left-
 ## aligned, 0.5 for centered, and 1.0 for right-aligned.
