@@ -1,4 +1,14 @@
 ﻿define n = Character("Nikki", image="nikki")
+define nd = Character("Nikki", image="decepcionado")
+define na = Character("Nikki", image="alegre")
+define np = Character("Nikki", image="preocupado")
+define np2 = Character("Nikki", image="pijama")
+define ns = Character("Nikki", image="senialando")
+define ng = Character("Nikki", image="guinio")
+define nm = Character("Nikki", image="miedo")
+define nc = Character("Nikki", image="chistoso")
+define nh = Character("Nikki", image="horrorizado")
+define nt = Character("Nikki", image="travieso")
 define eg = Character("El General")
 define j = Character("Juancho")
 define c = Character("Claus")
@@ -38,9 +48,29 @@ image carpageneral1_hover = "maps/9_hover.png"
 image carpaluna1 = "maps/10.png"
 image carpaluna1_hover = "maps/10_hover.png"
 
-image side nikki = "characters/nikki.png"
-image el general = "characters/el general.png"
-image juancho = "characters/juancho.png"
+image side nikki = "characters/nikki/default.png"
+image side decepcionado = "characters/nikki/decepcionado.png"
+image side alegre = "characters/nikki/alegre.png"
+image side preocupado = "characters/nikki/preocupado.png"
+image side pijama = "characters/nikki/pijama.png"
+image side senialando = "characters/nikki/senialando.png"
+image side guinio = "characters/nikki/guinio.png"
+image side miedo = "characters/nikki/miedo.png"
+image side chistoso = "characters/nikki/chistoso.png"
+image side horrorizado = "characters/nikki/horrorizado.png"
+image side travieso = "characters/nikki/travieso.png"
+image el general = "characters/el general/default.png"
+image el general confundido = "characters/el general/confundido.png"
+image el general pensando = "characters/el general/pensando.png"
+image el general enojado = "characters/el general/enojado.png"
+image el general disociado = "characters/el general/disociado.png"
+image el general mirando = "characters/el general/mirando.png"
+image juancho = "characters/juancho/default.png"
+image juancho alegre = "characters/juancho/alegre.png"
+image juancho boca abierta = "characters/juancho/boca abierta.png"
+image juancho chistoso = "characters/juancho/chistoso.png"
+image juancho enojado = "characters/juancho/enojado.png"
+image juancho sorprendido = "characters/juancho/sorprendido.png"
 image claus = "characters/claus.png"
 image pancho = "characters/pancho.png"
 image tina = "characters/tina.png"
@@ -49,7 +79,18 @@ image flor = "characters/flor.png"
 image betty = "characters/betty.png"
 image pablo = "characters/pablo.png"
 image teniente rosa = "characters/teniente rosa.png"
-image luna = "characters/luna.png"
+image luna = "characters/luna/default.png"
+image luna alegre = "characters/luna/alegre.png"
+image luna cruzando dedos = "characters/luna/cruzando dedos.png"
+image luna despidiendo = "characters/luna/despidiendo.png"
+image luna manos abiertas = "characters/luna/manos abiertas.png"
+image luna pensando = "characters/luna/pensando.png"
+image luna punio = "characters/luna/punio.png"
+image luna senialando = "characters/luna/senialando.png"
+image luna seria = "characters/luna/seria.png"
+image luna tapando = "characters/luna/tapando.png"
+image luna v = "characters/luna/v.png"
+image luna v2 = "characters/luna/v2.png"
 
 image bgcampa1 = "backgrounds/3.png"
 image bgcampb1 = "backgrounds/4.png"
