@@ -71,14 +71,45 @@ image juancho boca abierta = "characters/juancho/boca abierta.png"
 image juancho chistoso = "characters/juancho/chistoso.png"
 image juancho enojado = "characters/juancho/enojado.png"
 image juancho sorprendido = "characters/juancho/sorprendido.png"
-image claus = "characters/claus.png"
-image pancho = "characters/pancho.png"
-image tina = "characters/tina.png"
+image claus = "characters/claus/default.png"
+image claus alegre = "characters/claus/alegre.png"
+image claus chistoso = "characters/claus/chistoso.png"
+image claus enojado = "characters/claus/enojado.png"
+image claus horrorizado = "characters/claus/horrorizado.png"
+image claus travieso = "characters/claus/travieso.png"
+image pancho = "characters/pancho/default.png"
+image pancho alegre = "characters/pancho/alegre.png"
+image pancho contemplando = "characters/pancho/contemplando.png"
+image pancho guinio = "characters/pancho/guinio.png"
+image pancho nose = "characters/pancho/nose.png"
+image pancho triste = "characters/pancho/triste.png"
+image tina = "characters/tina/default.png"
+image tina alegre = "characters/tina/alegre.png"
+image tina criticando = "characters/tina/criticando.png"
+image tina horrorizada = "characters/tina/horrorizada.png"
+image tina nose = "characters/tina/nose.png"
+image tina nose2 = "characters/tina/nose2.png"
 image teniente felipe = "characters/teniente felipe.png"
 image flor = "characters/flor.png"
+image flor alegre = "characters/flor/alegre.png"
+image flor chistosa = "characters/flor/chistosa.png"
+image flor confundida = "characters/flor/confundida.png"
+image flor nose = "characters/flor/nose.png"
+image flor seria = "characters/flor/seria.png"
+image flor seria2 = "characters/flor/seria2.png"
 image betty = "characters/betty.png"
-image pablo = "characters/pablo.png"
-image teniente rosa = "characters/teniente rosa.png"
+image pablo = "characters/pablo/default.png"
+image pablo enojado = "characters/pablo/enojado.png"
+image pablo mirando = "characters/pablo/mirando.png"
+image pablo nose = "characters/pablo/nose.png"
+image pablo nose2 = "characters/pablo/nose2.png"
+image pablo sorprendido = "characters/pablo/sorprendido.png"
+image teniente rosa = "characters/teniente rosa/default.png"
+image teniente rosa alegre = "characters/teniente rosa/alegre.png"
+image teniente rosa chistosa = "characters/teniente rosa/chistosa.png"
+image teniente rosa confundida = "characters/teniente rosa/confundida.png"
+image teniente rosa enojada = "characters/teniente rosa/enojada.png"
+image teniente rosa nose = "characters/teniente rosa/nose.png"
 image luna = "characters/luna/default.png"
 image luna alegre = "characters/luna/alegre.png"
 image luna cruzando dedos = "characters/luna/cruzando dedos.png"
@@ -216,7 +247,7 @@ init python:
             renpy.music.set_volume(volume, channel="bgs")
 
 screen home1: 
-    on "show" action Function(play_bgs_once, "audio/bgs/campa.ogg", 0.3),
+    on "show" action Function(play_bgs_once, "audio/bgs/Ambiente Campamento.opus", 1.0),
     imagemap:
         ground "home1"
         hover "home1_hover"
@@ -225,7 +256,7 @@ screen home1:
         hotspot (934, 0, 399, 614) clicked Jump("campa1") hovered Play("sound", "audio/sfx/cierre.ogg")
 
 screen campa1:
-    on "show" action Function(play_bgs_once, "audio/bgs/campa.ogg", 1.0)
+    on "show" action Function(play_bgs_once, "audio/bgs/Ambiente Campamento.opus", 1.0)
     imagemap:
         ground "campa1"
         hover "campa1_hover"
@@ -237,7 +268,7 @@ screen campa1:
         hotspot (1668, 562, 247, 153) clicked Jump("campb1") hovered Play("sound", "audio/sfx/pasos 2.ogg")
 
 screen campb1:
-    on "show" action Function(play_bgs_once, "audio/bgs/campa.ogg", 1.0)
+    on "show" action Function(play_bgs_once, "audio/bgs/Ambiente Campamento.opus", 1.0)
     imagemap:
         ground "campb1"
         hover "campb1_hover"
@@ -248,7 +279,7 @@ screen campb1:
         hotspot (1530, 817, 388, 197) clicked Jump("campc1") hovered Play("sound", "audio/sfx/pasos 2.ogg")
 
 screen campc1:
-    on "show" action Function(play_bgs_once, "audio/bgs/campa.ogg", 1.0)
+    on "show" action Function(play_bgs_once, "audio/bgs/Ambiente Campamento.opus", 1.0)
     imagemap:
         ground "campc1"
         hover "campc1_hover"
@@ -262,12 +293,12 @@ screen bosquesoleado1:
         ground "bosquesoleado"
         hover "bosquesoleado_hover"
         
-        hotspot (22, 735, 356, 333) clicked Jump("arbusto1")
-        hotspot (427, 658, 323, 296) clicked Jump("arbusto2")
+        hotspot (22, 735, 356, 333) clicked Jump("arbusto1") hovered Play("sound", "audio/sfx/Arbusto 1.opus")
+        hotspot (427, 658, 323, 296) clicked Jump("arbusto2") hovered Play("sound", "audio/sfx/Arbusto 2.opus")
         hotspot (612, 959, 228, 118) clicked Jump("campa1")
         hotspot (825, 742, 222, 146) clicked Jump("bosquesombreado")
-        hotspot (1129, 681, 341, 304) clicked Jump("arbusto3")
-        hotspot (1516, 714, 390, 364) clicked Jump("arbusto4")
+        hotspot (1129, 681, 341, 304) clicked Jump("arbusto3") hovered Play("sound", "audio/sfx/Arbusto 3.opus")
+        hotspot (1516, 714, 390, 364) clicked Jump("arbusto4") hovered Play("sound", "audio/sfx/Arbusto 1.opus")
 
 screen bosquesombreadoct:
     imagemap:
@@ -313,6 +344,7 @@ label start:
     $ tobyMuerto = False
     $ preguntasluna = 0
     $ lunaNombre = False
+    $ pezArcoiris = False
 
     scene black
     window hide
@@ -334,7 +366,7 @@ label start:
     hide animation_luna with dissolve
     hide text with dissolve
 
-    play movie "video/1.webm"
+    $renpy.movie_cutscene("video/1.webm")
     jump home1
 
 label mesa1:
@@ -360,6 +392,7 @@ menu iroexplorar:
     "Si, señor.":
         n "Si, señor."
         hide teniente felipe with dissolve
+        stop bgs fadeout 1.0
         jump andaapescarpibe
 
     "Debo atender otros asuntos, señor.":
@@ -375,176 +408,311 @@ label campc1:
     call screen campc1
 
 label andaapescarpibe:
+    play bgs "bgs/Carpa Gral.opus"
     scene bgcarpageneral
-    show el general with dissolve
-    n "General, me dijeron que quería verme."
-    eg "Soldado, le voy a dar una tarea muy importante. Acérquese, por favor."
-    eg "Seguro habrá escuchado en el campamento que los suministros de alimento que trajimos resultaron pocos para la duración de esta misión."
-    eg "Estamos esperando la llegada de un paquete muy importante, pero mientras tanto, todos debemos colaborar."
-    n "¿Señor?"
-    eg "Le toca pescar, soldado."
-    n "Si, señor."
-    $ evento1 = True
-    hide el general with dissolve
-
-    jump campc1
+    if evento3:
+        show el general confundido with dissolve
+        eg "Soldado?"
+        n "Señor, debo informarle que cuando estuve en la playa ví una carpa y entré a investigar."
+        hide el general confundido
+        show el general
+        eg "Y que encontró?"
+        n "Adentro había una coneja blanca pero era distinta a nosotros."
+        hide el general
+        show el general disociado
+        nd "Ella no usaba ropa y se paraba en cuatro patas."
+        eg "No puede ser..."
+        hide el general disociado
+        show el general enojado
+        eg "Lléveme a esta carpa de la que habla!"
+        hide el general enojado with dissolve
+        show black with dissolve
+        stop bgs fadeout 1.0
+        jump peleaconelgral
+    else: 
+        show el general with dissolve
+        n "General, me dijeron que quería verme."
+        eg "Soldado, le voy a dar una tarea muy importante. Acérquese, por favor."
+        hide el general
+        show el general pensando
+        eg "Seguro habrá escuchado en el campamento que los suministros de alimento que trajimos resultaron pocos para la duración de esta misión."
+        eg "Estamos esperando la llegada de un paquete muy importante, pero mientras tanto, todos debemos colaborar."
+        np "¿Señor?"
+        hide el general pensando
+        show el general enojado
+        eg "Le toca pescar, soldado."
+        n "Si, señor."
+        $ evento1 = True
+        hide el general enojado with dissolve
+        stop bgs fadeout 1.0
+        jump campc1
 
 label tinapancho1:
     scene bgcampa1
 
-    if evento1:
-        show tina at left with dissolve
-        show pancho at right with dissolve
-        t "¿Te mandaron a pescar? ¿Solo?"
-        t "Podría haber zorros en la zona, ¿por qué no vas con alguien?"
-        p "No me mirés, yo ya estoy hasta las manos."
+    if evento3:
+        show tina criticando at left with dissolve
+        show pancho contemplando at right with dissolve
+        p "Una carpa brillante en la playa? Que te fumaste?"
+        nh "Les juro que es verdad!"
+        hide tina criticando
+        show tina nose2 at left
+        hide pancho contemplando
+        show pancho at right
+        t "Seguro hay una explicación lógica, capaz que hay nativos en la isla"
+        hide tina nose2
+        show tina at left
+        t "Pero igual cualquier civil que encuentres es mejor reportarselo al General."
         hide tina with dissolve
         hide pancho with dissolve
-    else: 
-        show tina at left with dissolve
-        show pancho at right with dissolve
-        p "Ya te despertaste, vago?"
-        n "¿Qué están haciendo?"
-        t "Andamos acá con Pancho moviendo los pocos suministros que tenemos..."
-        t "Aunque básicamente lo estoy moviendo todo yo."
-        p "Te estoy ayudando, no digas que no!"
-        t "Agarraste la caja más chiquita!"
-        
-        hide tina with dissolve
-        hide pancho with dissolve
+    else:
+        if evento1:
+            show tina at left with dissolve
+            show pancho at right with dissolve
+            t "¿Te mandaron a pescar? ¿Solo?"
+            t "Podría haber zorros en la zona, ¿por qué no vas con alguien?"
+            hide pancho
+            show pancho contemplando at right
+            p "No me mirés, yo ya estoy hasta las manos."
+            hide tina with dissolve
+            hide pancho contemplando with dissolve
+        else: 
+            show tina at left with dissolve
+            show pancho at right with dissolve
+            p "Ya te despertaste, vago?"
+            nc "¿Qué están haciendo?"
+            t "Andamos acá con Pancho moviendo los pocos suministros que tenemos..."
+            hide tina
+            show tina criticando at left
+            t "Aunque básicamente lo estoy moviendo todo yo."
+            hide pancho
+            show pancho alegre at right
+            p "Te estoy ayudando, no digas que no!"
+            t "Agarraste la caja más chiquita!"
+            hide tina criticando with dissolve
+            hide pancho alegre with dissolve
 
     jump campa1
 
 label clausjuancho1:
     scene bgcampa1
 
-    if evento1:
-        show juancho at left with dissolve
+    if evento3:
+        show juancho boca abierta at left with dissolve
         show claus at right with dissolve
 
-        c "Así que te mandaron a pescar, por fín te mandaron a hacer algo"
-        j "¡¡Uuh, que bueno! Hoy les voy a preparar una rica sopa de pescado!"
-        c "¡Agarrá la pala, Nikki!"
-        hide juancho with dissolve
+        j "¿Y las mojarritas, Nikki?"
+        hide claus
+        show claus horrorizado at right
+        c "¿Qué te encontraste... QUÉ?"
+        ng "Una carpa rara... con una coneja aún más rara adentro."
+        hide claus horrorizado
+        show claus enojado at right
+        c "Tenés que ir YA a informarle General!"
+        hide juancho boca abierta
+        show juancho enojado at left
+        j "Pero... ¿las mojarritas?"
+        hide claus enojado
+        show claus at right
+        c "Sólo a vos te importa más la comida que un posible enemigo."
+        hide juancho enojado with dissolve
         hide claus with dissolve
-    else: 
-        show juancho at left with dissolve
-        show claus at right with dissolve
-        
-        j "Hoy me tocó acomodar la carpa, la verdad preferiría cocinar..."
-        c "No te quejes, gordo! Yo ando remendando los uniformes."
-        hide juancho with dissolve
-        hide claus with dissolve
+    else:
+        if evento1:
+            show juancho at left with dissolve
+            show claus alegre at right with dissolve
+            
+            c "Así que te mandaron a pescar, por fín te mandaron a hacer algo"
+            hide juancho
+            show juancho alegre at left
+            j "¡¡Uuh, que bueno! Hoy les voy a preparar una rica sopa de pescado!"
+            hide claus alegre
+            show claus chistoso at right
+            c "¡Agarrá la pala, Nikki!"
+            hide claus chistoso
+            show claus alegre at right
+            j "La última que pescó fue, ¿Betty, creo?, me acuerdo que trajo unas mojarritas y las hice fritas ese día."
+            hide juancho alegre
+            show juancho chistoso at left
+            j "¡Qué ricas estaban!"
+            hide juancho chistoso with dissolve
+            hide claus alegre with dissolve
+        else: 
+            show juancho at left with dissolve
+            show claus at right with dissolve
+            j "Hoy me tocó acomodar la carpa, la verdad preferiría cocinar..."
+            hide claus
+            show claus enojado at right
+            c "No te quejes, gordo! Yo ando remendando los uniformes."
+            hide juancho with dissolve
+            hide claus enojado with dissolve
 
     jump campa1
 
 label florbetty1:
     scene bgcampb1
 
-    if evento1:
-        show flor with dissolve
-        f "¿El General te mandó a pescar? Vas a necesitar la caña y el balde. Betty fue la última en ir a pescar."
-        show flor at left
+    if evento3:
+        show flor nose at left with dissolve
         show betty at right with dissolve
-        b "Te doy la caña pero el balde se lo presté a Pablo, vas a tener que pedírselo."
-        if "caña" not in items:
-            show cania at truecenter
-            "¡Tenemos la caña para pescar! Solo falta el balde."
-            hide cania
-            $ items.append("caña")
-        $ pedirElBalde = True
-        hide flor with dissolve
-        hide betty with dissolve
-    else: 
-        show flor with dissolve
-        f "¡¡Nikki!! ¿No ves que estoy ocupada?"
-        hide flor with dissolve
-        show betty with dissolve
-        n "¿Qué están haciendo?"
-        b "Hola, Nikki, estoy abriendo los suministros."
-        n "¿Y Flor?"
-        b "Está supervisando a todos, tiene que asegurarse de que todo esté."
-        b "Pero en realidad está nerviosa porque faltan 5 latas de tomate."
-        n "¿Quién se robaría tanto tomate? ¿Y para qué?"
-        b "Supongo que nunca lo sabremos..."
-        hide betty with dissolve
+        f "Ya completaste tu tarea de hoy? Necesitamos alguien que vaya a las minas."
+
+        if pezArcoiris:
+            nd "Si, Flor, tengo los peces acá mismo. No los ves?"
+            b "Qué pasa, Nikki? Te ves pálido."
+            hide flor nose with dissolve
+            hide betty with dissolve
+        else:
+            hide flor nose
+            show flor confundida at left
+            f "Que? Una coneja tarotista?"
+            b "Estas cosas solo te suceden a vos, Nikki."
+            hide flor confundida with dissolve
+            hide betty with dissolve
+    else:
+        if evento1:
+            show flor seria at left with dissolve
+            show betty at right with dissolve
+            f "¿El General te mandó a pescar? Vas a necesitar la caña y el balde. "
+            b "Te doy la caña pero el balde se lo presté a Pablo, vas a tener que pedírselo."
+            if "caña" not in items:
+                show cania at truecenter
+                "¡Tenemos la caña para pescar! Solo falta el balde."
+                hide cania
+                $ items.append("caña")
+            $ pedirElBalde = True
+            hide flor seria with dissolve
+            hide betty with dissolve
+        else: 
+            show flor confundida with dissolve
+            f "¡¡Nikki!! ¿No ves que estoy ocupada?"
+            hide flor confundida with dissolve
+            show betty with dissolve
+            n "¿Qué están haciendo?"
+            b "Hola, Nikki, estoy abriendo los suministros."
+            nd "¿Y Flor?"
+            b "Está supervisando a todos, tiene que asegurarse de que todo esté."
+            b "Pero en realidad está nerviosa porque faltan 5 latas de tomate."
+            np "¿Quién se robaría tanto tomate? ¿Y para qué?"
+            b "Supongo que nunca lo sabremos..."
+            hide betty with dissolve
     jump campb1
 
 label pablo1:
     scene bgcampb1
 
-    if evento1:
-        if not pedirElBalde:
-            show pablo with dissolve
-            pb "El General me da miedo a veces... casi siempre."
-            hide pablo with dissolve
-        else:
-            show pablo with dissolve
-            pb "¿El balde? Si, yo se lo habia pedido a Betty"
-            pb "Estaba usándolo en el bosque para juntar frutas pero después escuché un ruido"
-            pb "Y me dió miedo porque pensé que era un zorro así que me volví y dejé el balde"
-            hide pablo with dissolve
+    if evento3:
+        show pablo sorprendido with dissolve
+        pb "¿Vos también la viste? Yo la ví pero me dio miedo entrar..."
+        hide pablo sorprendido with dissolve
         jump campb1
-    else: 
-        show pablo with dissolve
-        if "conejito de mimbre" not in items:
-            n "¿En qué andas?"
-            pb "Ando haciendo unos conejitos de mimbre para la suerte"
-            pb "¿Querés uno?"
-            jump conejitodemimbre
-        else:
-            pb "Amo hacer conejitos de mimbre."
+    else:
+        if evento1:
+            if not pedirElBalde:
+                show pablo mirando with dissolve
+                pb "El General me da miedo a veces... casi siempre."
+                hide pablo mirando with dissolve
+            else:
+                show pablo with dissolve
+                pb "¿El balde? Si, yo se lo habia pedido a Betty"
+                pb "Estaba usándolo en el bosque para juntar frutas pero después escuché un ruido"
+                hide pablo
+                show pablo nose
+                pb "Y me dió miedo porque pensé que era un zorro así que me volví y dejé el balde"
+                hide pablo nose with dissolve
             jump campb1
+        else: 
+            show pablo with dissolve
+            if "conejito de mimbre" not in items:
+                nc "¿En qué andas?"
+                pb "Ando haciendo unos conejitos de mimbre para la suerte"
+                pb "¿Querés uno?"
+                jump conejitodemimbre
+            else:
+                pb "Amo hacer conejitos de mimbre."
+                jump campb1
 
 menu conejitodemimbre:
     "Aceptar":
-        n "Me gustaría."
+        na "Me gustaría."
         show conejito de mimbre at truecenter
         "Recibis un coleccionable: Conejito de Mimbre"
         hide conejito de mimbre
         $ items.append("conejito de mimbre")
 
+        hide pablo
+        show pablo nose2
         pb "¡Disfrutalo!"
-        hide pablo with dissolve
+        hide pablo nose2 with dissolve
         jump campb1
 
     "Denegar":
-        n "Quizás más tarde."
+        nd "Quizás más tarde."
+        hide pablo
+        show pablo mirando
         pb "Bueno... quizás más tarde no haya otro"
-        hide pablo with dissolve
+        hide pablo mirando with dissolve
         jump campb1
 
 label felipe1:
     scene bgcampc1
-    if evento1:
+    if evento3:
         show teniente felipe with dissolve
-        tf "¿Todavía no fue a pescar? ¡Deje de holgazanear!"
+        if not pezArcoiris:
+            tf "Que caradurez venir a ver al General sin haber completado su tarea del día!"
+        n "Encontré algo en la playa y creo que el General querrá saber de que se trata"
+        tf "Interesante... Pase entonces, soldado."
         hide teniente felipe with dissolve
-        jump campc1
-    else:
-        show teniente felipe with dissolve
-        tf "¡Soldado! ¡No es apropiado hacer esperar a un General!"
-        n "Perdón, señor"
-        tf "¡Pase ya, y no lo haga esperar más!"
-        tf "{size=35}Mocoso insolente...{/size}"
-        hide teniente felipe with dissolve
+        stop bgs fadeout 1.0
         jump andaapescarpibe
+    else:
+        if evento1:
+            show teniente felipe with dissolve
+            tf "¿Todavía no fue a pescar? ¡Deje de holgazanear!"
+            hide teniente felipe with dissolve
+            jump campc1
+        else:
+            show teniente felipe with dissolve
+            tf "¡Soldado! ¡No es apropiado hacer esperar a un General!"
+            n "Perdón, señor"
+            tf "¡Pase ya, y no lo haga esperar más!"
+            tf "{size=35}Mocoso insolente...{/size}"
+            hide teniente felipe with dissolve
+            stop bgs fadeout 1.0
+            jump andaapescarpibe
 
 label rosa1: 
     scene bgcampc1
-    if evento1:
-        show teniente rosa with dissolve
-        tr "¿A pescar? Te dije que no iba a ser nada malo."
-        tr "Creo que vas a necesitar la caña y el balde."
+    if evento3:
+        if pezArcoiris:
+            show teniente rosa alegre with dissolve
+            tr "Muy bien, Nikki! Esta noche mojarritas a lo Juancho!"
+            hide teniente rosa alegre
+            show teniente rosa confundida
+        else:
+            show teniente rosa confundida with dissolve
+        tr "Que si hay nativos en la isla? Se supone que está deshabitada."
+        tr "Nuestro ejercito fue enviado a esta isla para proteger los recursos naturales."
+        hide teniente rosa confundida
+        show teniente rosa
+        tr "Por qué? Viste a alguien?"
         hide teniente rosa with dissolve
         jump campc1
     else:
-        show teniente rosa with dissolve
-        tr "Hola, Nikki, ¿cómo estás?"
-        n "Estoy bien, Teniente Rosa. El General me llamó para hablar sobre algo, no sé de que se trata."
-        tr "No te preocupes, no es nada malo, seguro te da la tarea de hoy."
-        hide teniente rosa with dissolve
-        jump campc1
+        if evento1:
+            show teniente rosa with dissolve
+            tr "¿A pescar? Creo que vas a necesitar la caña y el balde."
+            hide teniente rosa with dissolve
+            jump campc1
+        else:
+            show teniente rosa with dissolve
+            tr "Hola, Nikki, ¿cómo estás?"
+            np "Estoy bien, Teniente Rosa. El General me llamó para hablar sobre algo, no sé de que se trata."
+            hide teniente rosa
+            show teniente rosa alegre
+            tr "No te preocupes, no es nada malo, seguro te da la tarea de hoy."
+            hide teniente rosa alegre with dissolve
+            jump campc1
 
 label bosquesoleado1:
     if not evento1:
@@ -553,15 +721,18 @@ label bosquesoleado1:
         hide teniente rosa with dissolve
         jump campa1
     else:
-        if evento2:
-            if tobyMuerto:
-                scene bosquesombreadoct
-                "Aún no puedo volver, necesitamos comida."
-            else:
-                scene bosquesombreadost
-                "Aún no puedo volver, necesitamos comida."
-            jump bosquesombreado
-        call screen bosquesoleado1
+        if not evento3:
+            if evento2:
+                if tobyMuerto:
+                    scene bosquesombreadoct
+                    "Aún no puedo volver, necesitamos comida."
+                else:
+                    scene bosquesombreadost
+                    "Aún no puedo volver, necesitamos comida."
+                jump bosquesombreado
+    stop bgs fadeout 1.0
+    play bgs "bgs/Bosque Soleado.opus" fadein 1.0
+    call screen bosquesoleado1
 
 label arbusto1:
     scene bgbosquesoleado
@@ -648,6 +819,8 @@ label arbusto4:
         jump bosquesoleado1
 
 label bosquesombreado:
+    stop bgs fadeout 1.0
+    play bgs "bgs/Ambente Bosque Tenebros.opus" fadein 1.0
     if evento2:
         if tobyMuerto:
             call screen bosquesombreadoct
@@ -834,7 +1007,6 @@ label heriratoby:
         preg "¡No, por favor! ¡No lo hagas!"
 
     n "¡Decime donde está el campamento!"
-    "*lo hiere*"
     n "Si no me decís te voy a llevar a nuestra base y ellos son peores que yo."
 
     if tobyNombre:
@@ -847,7 +1019,7 @@ label heriratoby:
 
     hide toby
     show black with dissolve
-
+    play sound "audio/sfx/Escena tortura prueba 1.wav"
     $ renpy.pause() 
 
     show bosquesombreadoct
@@ -865,6 +1037,8 @@ label zorromuerto:
     jump bosquesombreado
 
 label playa1:
+    stop bgs fadeout 1.0
+    play bgs "bgs/Ambiente Playa.opus" fadein 1.0
     call screen playa1
 
 label pescar:
@@ -873,6 +1047,8 @@ label pescar:
     jump playa1
 
 label carpaluna1:
+    stop bgs fadeout 1.0
+    play bgs "bgs/Ambiet Int carpa Luna.opus" fadein 1.0
     if evento3:
         scene bgcarpaluna
         n "Debo volver al campamento rápido."
@@ -883,7 +1059,11 @@ label luna1:
     scene bgcarpaluna
     show luna with dissolve
     preg "Ha llegado aquel que podría ser, cuyo destino no es suyo, sino que está en manos de otro ser."
+    hide luna
+    show luna senialando
     preg "Pero ¿cuál camino será el que te harán caminar?"
+    hide luna senialando
+    show luna manos abiertas
     preg "¿Qué hilos tensarán?¿Qué final esta historia te presentará?"
 
     jump preguntasluna
@@ -899,11 +1079,14 @@ menu preguntasluna:
         jump pregluna3
 
 label pregluna1:
-    n "¿Quién sos?"
+    show luna tapando
+    np "¿Quién sos?"
     preg "Muchos nombres posee aquella que el velo ve, de lenguas impronunciables"
     preg "Pero que la proveedora de argenta luz en la noche aclare cualquier duda de mi ser"
-    n "Eso me genera más dudas, en realidad"
-    n "Te llamaré Luna"
+    hide luna tapando
+    show luna
+    np "Eso me genera más dudas, en realidad"
+    nt "Te llamaré Luna"
     $ lunaNombre = True
     $ preguntasluna += 1
     if preguntasluna >= 3:
@@ -912,13 +1095,20 @@ label pregluna1:
         jump preguntasluna
 
 label pregluna2:
-    n "¿Qué haces acá?"
+    show luna
+    np "¿Qué haces acá?"
     if lunaNombre:
+        hide luna
+        show luna seria
         l "Los porqué o los dónde son dispensables dudas en tu camino hacia mí, importa el ahora"
         l "Y ahora nos encontramos para que tu destino deje se ser un solo camino."
+        hide luna seria
     else:
+        hide luna
+        show luna seria
         preg "Los porqué o los dónde son dispensables dudas en tu camino hacia mí, importa el ahora"
         preg "Y ahora nos encontramos para que tu destino deje se ser un solo camino."
+        hide luna seria
     $ preguntasluna += 1
     if preguntasluna >= 3:
         jump luna2
@@ -926,13 +1116,20 @@ label pregluna2:
         jump preguntasluna
 
 label pregluna3:
+    show luna
     n "¿Cómo llegaste acá? Hace un momento esta playa estaba vacía."
     if lunaNombre:
-        l "No hay /“acá/” o /“allá/”, el todo no está más que ligeramente sostenido por cuestiones ligadas al ser que las percibe"
+        hide luna
+        show luna tapando
+        l "No hay \“acá\” o \“allá\”, el todo no está más que ligeramente sostenido por cuestiones ligadas al ser que las percibe"
         l "Si tu hoy y tu ayer fueron iguales, entonces ¿por qué importaría darles diferencia?"
+        hide luna tapando
     else:
-        preg "No hay /“acá/” o /“allá/”, el todo no está más que ligeramente sostenido por cuestiones ligadas al ser que las percibe"
+        hide luna
+        show luna tapando
+        preg "No hay \“acá\” o \“allá\”, el todo no está más que ligeramente sostenido por cuestiones ligadas al ser que las percibe"
         preg "Si tu hoy y tu ayer fueron iguales, entonces ¿por qué importaría darles diferencia?"
+        hide luna tapando
     $ preguntasluna += 1
     if preguntasluna >= 3:
         jump luna2
@@ -940,18 +1137,25 @@ label pregluna3:
         jump preguntasluna
 
 label luna2:
+    show luna
     l "Tus demás dudas deberán quedar en el aire me temo, pues el tiempo, aunque imperceptible, nos es desfavorable."
     l "No quedará nada de esta tierra luego de cumplir su sentencia."
+    hide luna
+    show luna seria
     l "El despiadado cosmos engañará nuestros ojos, la tierra temblará y rugirá."
     l "Nada de este impuro suelo quedará..."
+    hide luna seria
+    show luna senialando
     l "Y tú, Nikki, tienes una decisión que tomar, abre tu mente y divide tus caminos."
+    hide luna senialando
+    show luna cruzando dedos
     l "Oh, aquel que será, acércate y toma una carta! Construye tu potencial, liberate y construye tu futuro!"
-    n "¿Cómo sabes mi nombre?"
+    nm "¿Cómo sabes mi nombre?"
 
-    play movie "video/luna.webm"
+    $renpy.movie_cutscene("video/luna.webm")
 
     if carta == 'torre':
-        play movie "video/carta_torre.webm"
+        $renpy.movie_cutscene("video/carta_torre.webm")
         show image "animations/carta_torre.png" zorder 5
         l "En un solitario camino has sellado tu destino, tu falta se nota. Lavaste tus manos, tu piel y pelaje limpios a simple vista pero, ¿lo estas?"
         l "¿Tiene salvación tu alma?, no es algo que pueda responder, pero tal vez…"
@@ -961,7 +1165,7 @@ label luna2:
         jump carpaluna1
     else:
         if carta == 'muerte':
-            play movie "video/carta_muerte.webm"
+            $renpy.movie_cutscene("video/carta_muerte.webm")
             show image "animations/carta_muerte.png" zorder 5
             l "Veo un proceso que inicia, pero falta el más importante paso ¿Qué tempo irás marcando?"
             l "Aquel que cambio trae, no olvides que tus acciones consecuencias tienen, que tú caos no te frene."
@@ -969,7 +1173,7 @@ label luna2:
             jump carpaluna1
         else:
             if carta == 'diablo':
-                play movie "video/carta_diablo.webm"
+                $renpy.movie_cutscene("video/carta_diablo.webm")
                 show image "animations/carta_diablo.png" zorder 5
                 l "En tu alma se cierne un oscuro paso, que con tempo lento avanza sin descanso, mientras te corta caminos y endurece tu alma condenada"
                 l "Tal vez te falta esperanza, tal vez pensás que nada te falta, solo vos sabés que falla, pero, ¿Podrás acaso enmendar lo rasgado?"
@@ -986,7 +1190,10 @@ label luna2:
                     l "Si así nos encontramos, así nuevamente nos cruzaremos, confía en que los hilos incitarán a cruzarnos otra vez."
                     $ evento3 = True
                     jump carpaluna1
-        
+
+label peleaconelgral:
+    return
+
 
 
     # This ends the game.
