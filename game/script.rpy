@@ -142,6 +142,12 @@ image frutos rojos = "animations/arbustos/frutos_rojos.png"
 image palo = "animations/arbustos/palo.png"
 image balde_chico = "animations/arbustos/balde.png"
 
+image fondo pesca = "animations/pescar/bg.png"
+image pez gris 1 = "animations/pescar/pez_1.png"
+image pez gris 2 = "animations/pescar/pez_2.png"
+image pez arcoiris = "animations/pescar/pez arcoiris.png"
+image agua pesca = "animations/pescar/agua.png"
+
 image animation_sol:
     "animations/eclipse/sol1.png"
     pause 0.15
@@ -208,6 +214,61 @@ image animation_arbusto4:
     pause 0.15
     repeat False
 
+image animation_pez1:
+    "animations/pescar/pez1/1.png"
+    pause 0.15
+    "animations/pescar/pez1/2.png"
+    pause 0.15
+    "animations/pescar/pez1/3.png"
+    pause 0.15
+    "animations/pescar/pez1/4.png"
+    pause 0.15
+    "animations/pescar/pez1/5.png"
+    pause 0.15
+    "animations/pescar/pez1/6.png"
+    pause 0.15
+    "animations/pescar/pez1/7.png"
+    pause 0.15
+    "animations/pescar/pez1/8.png"
+    pause 0.15
+    repeat False
+
+image animation_pez2:
+    "animations/pescar/pez2/1.png"
+    pause 0.15
+    "animations/pescar/pez2/2.png"
+    pause 0.15
+    "animations/pescar/pez2/3.png"
+    pause 0.15
+    "animations/pescar/pez2/4.png"
+    pause 0.15
+    "animations/pescar/pez2/5.png"
+    pause 0.15
+    "animations/pescar/pez2/6.png"
+    pause 0.15
+    "animations/pescar/pez2/7.png"
+    pause 0.15
+    repeat False
+
+image animation_pez3:
+    "animations/pescar/pez3/1.png"
+    pause 0.15
+    "animations/pescar/pez3/2.png"
+    pause 0.15
+    "animations/pescar/pez3/3.png"
+    pause 0.15
+    "animations/pescar/pez3/4.png"
+    pause 0.15
+    "animations/pescar/pez3/5.png"
+    pause 0.15
+    "animations/pescar/pez3/6.png"
+    pause 0.15
+    "animations/pescar/pez3/7.png"
+    pause 0.15
+    "animations/pescar/pez3/8.png"
+    pause 0.15
+    repeat False
+
 transform move_across:
     xpos 0.4
     linear 7.0 xpos 0.0 
@@ -245,6 +306,18 @@ init python:
             renpy.music.play(sound_file, channel="bgs", loop=True)
             bgs_started = True
             renpy.music.set_volume(volume, channel="bgs")
+
+init python:
+    def pescar(num):
+        renpy.hide_screen("juegopesca")
+        renpy.show(f"animation_pez{num}")
+
+        globals()[f"tengopez{num}"] = True
+
+        if all([tengopez1, tengopez2, tengopez3]):
+            renpy.jump("tengo3peces")
+        else:
+            renpy.show_screen("juegopesca")
 
 screen home1: 
     on "show" action Function(play_bgs_once, "audio/bgs/Ambiente Campamento.opus", 1.0),
@@ -333,6 +406,23 @@ screen carpaluna1:
         
         hotspot (776, 241, 345, 520) clicked Jump("luna1")
 
+screen juegopesca():
+    if not tengopez1:
+        imagebutton:
+            idle "animations/pescar/pez_1.png"
+            xpos 180 ypos 405
+            action Function(pescar, 1)
+    if not tengopez2:
+        imagebutton:
+            idle "animations/pescar/pez_2.png"
+            xpos 1200 ypos 485
+            action Function(pescar, 2)
+    if not tengopez3:
+        imagebutton:
+            idle "animations/pescar/pez arcoiris.png"
+            xpos 630 ypos 745
+            action Function(pescar, 3)
+
 label start:
     $ items = [] 
     $ evento1 = False
@@ -344,7 +434,7 @@ label start:
     $ tobyMuerto = False
     $ preguntasluna = 0
     $ lunaNombre = False
-    $ pezArcoiris = False
+    $ yaPesque = False
 
     scene black
     window hide
@@ -557,7 +647,7 @@ label florbetty1:
         show betty at right with dissolve
         f "Ya completaste tu tarea de hoy? Necesitamos alguien que vaya a las minas."
 
-        if pezArcoiris:
+        if tengopez3:
             nd "Si, Flor, tengo los peces acá mismo. No los ves?"
             b "Qué pasa, Nikki? Te ves pálido."
             hide flor nose with dissolve
@@ -658,7 +748,7 @@ label felipe1:
     scene bgcampc1
     if evento3:
         show teniente felipe with dissolve
-        if not pezArcoiris:
+        if not tengopez3:
             tf "Que caradurez venir a ver al General sin haber completado su tarea del día!"
         n "Encontré algo en la playa y creo que el General querrá saber de que se trata"
         tf "Interesante... Pase entonces, soldado."
@@ -684,7 +774,7 @@ label felipe1:
 label rosa1: 
     scene bgcampc1
     if evento3:
-        if pezArcoiris:
+        if tengopez3:
             show teniente rosa alegre with dissolve
             tr "Muy bien, Nikki! Esta noche mojarritas a lo Juancho!"
             hide teniente rosa alegre
@@ -1042,8 +1132,24 @@ label playa1:
     call screen playa1
 
 label pescar:
-    scene playa
-    "Todavia no lo hice"
+    if yaPesque:
+        jump tengo3peces
+    scene fondo pesca
+    show agua pesca
+    $ tengopez1 = False
+    $ tengopez2 = False
+    $ tengopez3 = False
+
+    call screen juegopesca
+
+label tengo3peces:
+    if not yaPesque:
+        pause 2.0
+    scene fondo pesca
+    show agua pesca
+    nc "Ya tenemos suficientes peces por ahora."
+    hide agua pesca
+    $ yaPesque = True
     jump playa1
 
 label carpaluna1:
