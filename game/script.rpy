@@ -129,6 +129,7 @@ image bgcampc1 = "backgrounds/5.png"
 image bgcarpageneral = "backgrounds/9.png"
 image bgbosquesoleado = "backgrounds/6.png"
 image bgcarpaluna = "backgrounds/10.png"
+image bgarroyovacio = "backgrounds/13.png"
 
 image conejito de mimbre = "objects/conejito_de_mimbre.png"
 image cania = "objects/cania.png"
@@ -1298,6 +1299,43 @@ label luna2:
                     jump carpaluna1
 
 label peleaconelgral:
+    scene bgcarpaluna with dissolve
+
+    show el general mirando with dissolve
+
+    eg "No la veo por ningún lado..."
+    hide el general mirando
+    show el general pensando
+    nd "Ella desvaneció luego de hablar conmigo, General"
+    hide el general pensando
+    n "¿Que está buscando?"
+    n "..."
+    show el general enojado
+    eg "¿Donde está?"
+    nd "Ya le dije, señor, ella huyó mientras yo miraba una de sus cartas."
+    eg "¿Cartas?"
+    eg "¿Dónde está el amuleto?"
+    np "No sé de que está hablando, General."
+    eg "¡Mentiras! ¡Estás conspirando con esa coneja del demonio!"
+    ns "¿Yo?"
+    hide el general enojado
+    show el general disociado
+    eg "Ella vino a mi en un sueño... Me mostró el poder del amuleto..."
+    hide el general disociado
+    show el general enojado
+    eg "Lo siento, Nikki. No puedo dejar que nadie mas lo tenga..."
+    nm "¿Qué está haciendo?"
+    nh "¡Alejese de mi!"
+    "*forcejeo*"
+    show black with dissolve
+    show bgarroyovacio with dissolve
+    np "Que bién que pude escaparme de ese lunático. Pero ahora..."
+    nd "¿Qué voy a hacer?"
+
+
+
+
+
     return
 
 
