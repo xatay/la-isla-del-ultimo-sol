@@ -47,6 +47,9 @@ image carpageneral1 = "maps/9.png"
 image carpageneral1_hover = "maps/9_hover.png"
 image carpaluna1 = "maps/10.png"
 image carpaluna1_hover = "maps/10_hover.png"
+image arroyo1 = "maps/13.png"
+image arroyo1_hover = "maps/13_hover.png"
+image bosquecreepy = "maps/14.png"
 
 image side nikki = "characters/nikki/default.png"
 image side decepcionado = "characters/nikki/decepcionado.png"
@@ -89,7 +92,12 @@ image tina criticando = "characters/tina/criticando.png"
 image tina horrorizada = "characters/tina/horrorizada.png"
 image tina nose = "characters/tina/nose.png"
 image tina nose2 = "characters/tina/nose2.png"
-image teniente felipe = "characters/teniente felipe.png"
+image teniente felipe = "characters/teniente felipe/default.png"
+image teniente felipe anotando = "characters/teniente felipe/anotando.png"
+image teniente felipe enojado = "characters/teniente felipe/enojado.png"
+image teniente felipe frustrado = "characters/teniente felipe/frustrado.png"
+image teniente felipe mirando = "characters/teniente felipe/mirando.png"
+image teniente felipe molesto = "characters/teniente felipe/molesto.png"
 image flor = "characters/flor.png"
 image flor alegre = "characters/flor/alegre.png"
 image flor chistosa = "characters/flor/chistosa.png"
@@ -97,7 +105,12 @@ image flor confundida = "characters/flor/confundida.png"
 image flor nose = "characters/flor/nose.png"
 image flor seria = "characters/flor/seria.png"
 image flor seria2 = "characters/flor/seria2.png"
-image betty = "characters/betty.png"
+image betty = "characters/betty/default.png"
+image betty alegre = "characters/betty/alegre.png"
+image betty chistosa = "characters/betty/chistosa.png"
+image betty manos arriba= "characters/betty/manos arriba.png"
+image betty mirando = "characters/betty/mirando.png"
+image betty sonrojando = "characters/betty/sonrojando.png"
 image pablo = "characters/pablo/default.png"
 image pablo enojado = "characters/pablo/enojado.png"
 image pablo mirando = "characters/pablo/mirando.png"
@@ -407,6 +420,15 @@ screen carpaluna1:
         
         hotspot (776, 241, 345, 520) clicked Jump("luna1")
 
+screen arroyo1:
+    imagemap:
+        ground "arroyo1"
+        hover "arroyo1_hover"
+        
+        hotspot (455, 855, 360, 220) clicked Jump("bosquesombreado")
+        hotspot (274, 240, 500, 340) clicked Jump("bosquecreepy")
+        hotspot (1714, 627, 205, 224) clicked Jump("represa1")
+
 screen juegopesca():
     if not tengopez1:
         imagebutton:
@@ -436,6 +458,10 @@ label start:
     $ preguntasluna = 0
     $ lunaNombre = False
     $ yaPesque = False
+    $ estoyEnLaPlaya = False
+    $ tengopez1 = False
+    $ tengopez2 = False
+    $ tengopez3 = False
 
     scene black
     window hide
@@ -488,8 +514,10 @@ menu iroexplorar:
 
     "Debo atender otros asuntos, señor.":
         n "Debo atender otros asuntos, señor."
+        hide teniente felipe
+        show teniente felipe molesto
         tf "Que no le tomen mucho tiempo soldado, sabe que al General no le gusta esperar."
-        hide teniente felipe with dissolve
+        hide teniente felipe molesto with dissolve
         jump campa1
 
 label campb1:
@@ -605,9 +633,20 @@ label clausjuancho1:
         j "Pero... ¿las mojarritas?"
         hide claus enojado
         show claus at right
-        c "Sólo a vos te importa más la comida que un posible enemigo."
-        hide juancho enojado with dissolve
-        hide claus with dissolve
+
+        if tengopez3:
+            ng "Acá tengo las mojarritas."
+            hide juancho enojado
+            show juancho chistoso at left
+            j "Yo sabía que tenías tus prioridades claras, y hasta conseguiste uno muy interesante. ¡Gracias!"
+            hide juancho chistoso with dissolve
+            hide claus with dissolve
+
+        else:
+            c "Sólo a vos te importa más la comida que un posible enemigo."
+            hide juancho enojado with dissolve
+            hide claus with dissolve
+
     else:
         if evento1:
             show juancho at left with dissolve
@@ -645,11 +684,13 @@ label florbetty1:
 
     if evento3:
         show flor nose at left with dissolve
-        show betty at right with dissolve
+        show betty mirando at right with dissolve
         f "Ya completaste tu tarea de hoy? Necesitamos alguien que vaya a las minas."
 
         if tengopez3:
             nd "Si, Flor, tengo los peces acá mismo. No los ves?"
+            hide betty mirando
+            show betty at right
             b "Qué pasa, Nikki? Te ves pálido."
             hide flor nose with dissolve
             hide betty with dissolve
@@ -657,14 +698,18 @@ label florbetty1:
             hide flor nose
             show flor confundida at left
             f "Que? Una coneja tarotista?"
+            hide betty mirando
+            show betty chistosa at right
             b "Estas cosas solo te suceden a vos, Nikki."
             hide flor confundida with dissolve
-            hide betty with dissolve
+            hide betty chistosa with dissolve
     else:
         if evento1:
             show flor seria at left with dissolve
             show betty at right with dissolve
             f "¿El General te mandó a pescar? Vas a necesitar la caña y el balde. "
+            hide betty
+            show betty manos arriba at right
             b "Te doy la caña pero el balde se lo presté a Pablo, vas a tener que pedírselo."
             if "caña" not in items:
                 show cania at truecenter
@@ -673,20 +718,26 @@ label florbetty1:
                 $ items.append("caña")
             $ pedirElBalde = True
             hide flor seria with dissolve
-            hide betty with dissolve
+            hide betty manos arriba with dissolve
         else: 
             show flor confundida with dissolve
             f "¡¡Nikki!! ¿No ves que estoy ocupada?"
             hide flor confundida with dissolve
             show betty with dissolve
             n "¿Qué están haciendo?"
+            hide betty
+            show betty manos arriba
             b "Hola, Nikki, estoy abriendo los suministros."
             nd "¿Y Flor?"
             b "Está supervisando a todos, tiene que asegurarse de que todo esté."
+            hide betty manos arriba
+            show betty alegre
             b "Pero en realidad está nerviosa porque faltan 5 latas de tomate."
             np "¿Quién se robaría tanto tomate? ¿Y para qué?"
+            hide betty alegre
+            show betty chistosa
             b "Supongo que nunca lo sabremos..."
-            hide betty with dissolve
+            hide betty chistosa with dissolve
     jump campb1
 
 label pablo1:
@@ -748,27 +799,37 @@ menu conejitodemimbre:
 label felipe1:
     scene bgcampc1
     if evento3:
-        show teniente felipe with dissolve
         if not tengopez3:
+            show teniente felipe enojado with dissolve
             tf "Que caradurez venir a ver al General sin haber completado su tarea del día!"
-        n "Encontré algo en la playa y creo que el General querrá saber de que se trata"
+            n "Encontré algo en la playa y creo que el General querrá saber de que se trata"
+            hide teniente felipe enojado
+        else:
+            show teniente felipe with dissolve
+            n "Encontré algo en la playa y creo que el General querrá saber de que se trata"
+            hide teniente felipe
+        show teniente felipe anotando
         tf "Interesante... Pase entonces, soldado."
-        hide teniente felipe with dissolve
+        hide teniente felipe anotando with dissolve
         stop bgs fadeout 1.0
         jump andaapescarpibe
     else:
         if evento1:
-            show teniente felipe with dissolve
+            show teniente felipe enojado with dissolve
             tf "¿Todavía no fue a pescar? ¡Deje de holgazanear!"
-            hide teniente felipe with dissolve
+            hide teniente felipe enojado with dissolve
             jump campc1
         else:
-            show teniente felipe with dissolve
+            show teniente felipe frustrado with dissolve
             tf "¡Soldado! ¡No es apropiado hacer esperar a un General!"
             n "Perdón, señor"
+            hide teniente felipe frustrado
+            show teniente felipe molesto
             tf "¡Pase ya, y no lo haga esperar más!"
+            hide teniente felipe molesto
+            show teniente felipe mirando
             tf "{size=35}Mocoso insolente...{/size}"
-            hide teniente felipe with dissolve
+            hide teniente felipe mirando with dissolve
             stop bgs fadeout 1.0
             jump andaapescarpibe
 
@@ -910,6 +971,13 @@ label arbusto4:
         jump bosquesoleado1
 
 label bosquesombreado:
+    if estoyEnLaPlaya:
+        if not evento3:
+            show playa
+            "Hay una carpa extraña en el medio de la playa..."
+            hide playa
+            jump playa1
+
     stop bgs fadeout 1.0
     play bgs "bgs/Ambente Bosque Tenebros.opus" fadein 1.0
     if evento2:
@@ -1130,16 +1198,32 @@ label zorromuerto:
 label playa1:
     stop bgs fadeout 1.0
     play bgs "bgs/Ambiente Playa.opus" fadein 1.0
+    $ estoyEnLaPlaya = True
     call screen playa1
 
 label pescar:
+    if "caña" not in items:
+        if "balde" not in items:
+            scene fondo pesca
+            show agua pesca
+            "No tenemos la caña ni el balde para pescar."
+            hide agua pesca
+            jump playa1
+        scene fondo pesca
+        show agua pesca
+        "Necesitamos la caña para pescar."
+        hide agua pesca
+        jump playa1
+    if "balde" not in items:
+        scene fondo pesca
+        show agua pesca
+        "No tenemos el balde para llevar los pescados al campamento."
+        hide agua pesca
+        jump playa1
     if yaPesque:
         jump tengo3peces
     scene fondo pesca
     show agua pesca
-    $ tengopez1 = False
-    $ tengopez2 = False
-    $ tengopez3 = False
 
     call screen juegopesca
 
@@ -1331,7 +1415,20 @@ label peleaconelgral:
     show bgarroyovacio with dissolve
     np "Que bién que pude escaparme de ese lunático. Pero ahora..."
     nd "¿Qué voy a hacer?"
+    jump arroyo1
 
+label arroyo1:
+    call screen arroyo1
+
+label bosquecreepy:
+    scene bosquecreepy
+
+    "Todavia no lo hice"
+    jump arroyo1
+
+label represa1:
+    "Todavia no lo hice"
+    jump arroyo1
 
 
 
