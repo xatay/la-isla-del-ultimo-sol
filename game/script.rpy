@@ -41,6 +41,10 @@ image bosquesombreadost = "maps/7b.png"
 image bosquesombreadost_hover = "maps/7b_hover.png"
 image bosquesombreadoct = "maps/7c.png"
 image bosquesombreadoct_hover = "maps/7c_hover.png"
+image bosquesombreadost2 = "maps/7d.png"
+image bosquesombreadost2_hover = "maps/7d_hover.png"
+image bosquesombreadoct2 = "maps/7e.png"
+image bosquesombreadoct2_hover = "maps/7e_hover.png"
 image playa = "maps/8.png"
 image playa_hover = "maps/8_hover.png"
 image carpageneral1 = "maps/9.png"
@@ -50,6 +54,13 @@ image carpaluna1_hover = "maps/10_hover.png"
 image arroyo1 = "maps/13.png"
 image arroyo1_hover = "maps/13_hover.png"
 image bosquecreepy = "maps/14.png"
+image bosquecreepy_hover = "maps/14_hover.png"
+image entradacueva = "maps/15.png"
+image entradacueva_hover = "maps/15_hover.png"
+image bosquezorros = "maps/17.png"
+image bosquezorros_hover = "maps/17_hover.png"
+image campazorros = "maps/18.png"
+image campazorros_hover = "maps/18_hover.png"
 
 image side nikki = "characters/nikki/default.png"
 image side decepcionado = "characters/nikki/decepcionado.png"
@@ -404,6 +415,25 @@ screen bosquesombreadost:
         hotspot (0, 0, 735, 690) clicked Jump("playa1")
         hotspot (912, 850, 313, 236) clicked Jump("bosquesoleado1")
 
+screen bosquesombreadoct2:
+    imagemap:
+        ground "bosquesombreadoct2"
+        hover "bosquesombreadoct2_hover"
+        
+        hotspot (0, 0, 735, 690) clicked Jump("playa1")
+        hotspot (912, 850, 313, 236) clicked Jump("bosquesoleado1")
+        hotspot (914, 93, 196, 500) clicked Jump("arroyo1")
+        hotspot (1111, 477, 463, 308) clicked Jump("zorromuerto")
+
+screen bosquesombreadost2:
+    imagemap:
+        ground "bosquesombreadost2"
+        hover "bosquesombreadost2_hover"
+        
+        hotspot (0, 0, 735, 690) clicked Jump("playa1")
+        hotspot (912, 850, 313, 236) clicked Jump("bosquesoleado1")
+        hotspot (914, 93, 215, 500) clicked Jump("arroyo1")
+
 screen playa1:
     imagemap:
         ground "playa"
@@ -425,9 +455,43 @@ screen arroyo1:
         ground "arroyo1"
         hover "arroyo1_hover"
         
-        hotspot (455, 855, 360, 220) clicked Jump("bosquesombreado")
+        hotspot (455, 855, 360, 220) clicked Jump("bosquesombreado2")
         hotspot (274, 240, 500, 340) clicked Jump("bosquecreepy")
+        hotspot (1480, 170, 250, 350) clicked Jump("bosquezorros")
         hotspot (1714, 627, 205, 224) clicked Jump("represa1")
+
+screen bosquecreepy:
+    imagemap:
+        ground "bosquecreepy"
+        hover "bosquecreepy_hover"
+        
+        hotspot (1213, 476, 150, 250) clicked Jump("entradacueva")
+        hotspot (936, 616, 280, 443) clicked Jump("pablo2")
+        hotspot (1213, 855, 165, 225) clicked Jump("arroyo1")
+
+screen entradacueva:
+    imagemap:
+        ground "entradacueva"
+        hover "entradacueva_hover"
+        
+        hotspot (420, 540, 350, 360) clicked Jump("cueva1")
+        hotspot (1456, 510, 380, 370) clicked Jump("bosquecreepy")
+
+screen bosquezorros:
+    imagemap:
+        ground "bosquezorros"
+        hover "bosquezorros_hover"
+        
+        hotspot (888, 647, 150, 185) clicked Jump("campazorros")
+        hotspot (675, 885, 245, 195) clicked Jump("arroyo1")
+
+screen campazorros:
+    imagemap:
+        ground "campazorros"
+        hover "campazorros_hover"
+        
+        hotspot (203, 433, 400, 510) clicked Jump("madriguera")
+        hotspot (1310, 895, 610, 185) clicked Jump("bosquezorros")
 
 screen juegopesca():
     if not tengopez1:
@@ -451,6 +515,7 @@ label start:
     $ evento1 = False
     $ evento2 = False
     $ evento3 = False
+    $ evento4 = False
     $ felipeOrden = True
     $ pedirElBalde = False
     $ tobyNombre = False
@@ -971,6 +1036,9 @@ label arbusto4:
         jump bosquesoleado1
 
 label bosquesombreado:
+    if evento4:
+        jump bosquesombreado2
+
     if estoyEnLaPlaya:
         if not evento3:
             show playa
@@ -1021,7 +1089,7 @@ label pat1:
     $ tobyNombre = True
     tb "Su nombre es Maria, y yo me llamo Toby. Nos íbamos a casar cuando vuelva"
 
-    jump bosquesombreado2
+    jump bosquesombreado1
 
 label pat2:
     n "¿Quién sos? Y de dónde venís?"
@@ -1030,7 +1098,7 @@ label pat2:
     n "Un zorro desertor? Que patético"
     tb "Por favor perdoname la vida y te doy un mapa"
 
-    jump bosquesombreado2
+    jump bosquesombreado1
 
 label pat3:
     n "¿Quién te envió?"
@@ -1040,7 +1108,7 @@ label pat3:
     n "Mostrame alguna prueba"
     preg "En mi bolsillo tengo un mapa."
 
-    jump bosquesombreado2
+    jump bosquesombreado1
 
 label pat4:
     n "¿Por qué debería perdonarte la vida?"
@@ -1052,9 +1120,9 @@ label pat4:
     n "¿Un zorro desertor? Que patético"
     tb "Por favor perdoname la vida y te doy un mapa"
 
-    jump bosquesombreado2
+    jump bosquesombreado1
 
-label bosquesombreado2:
+label bosquesombreado1:
     $ items.append("mapa")
 
     if tobyNombre:
@@ -1193,7 +1261,10 @@ label heriratoby:
 label zorromuerto:
     scene bosquesombreadoct
     "Un zorro muerto, nada importante."
-    jump bosquesombreado
+    if evento4:
+        jump bosquesombreado2
+    else:
+        jump bosquesombreado
 
 label playa1:
     stop bgs fadeout 1.0
@@ -1415,16 +1486,40 @@ label peleaconelgral:
     show bgarroyovacio with dissolve
     np "Que bién que pude escaparme de ese lunático. Pero ahora..."
     nd "¿Qué voy a hacer?"
+    $ evento4 = True
     jump arroyo1
 
 label arroyo1:
     call screen arroyo1
 
-label bosquecreepy:
-    scene bosquecreepy
+label bosquesombreado2:
+    stop bgs fadeout 1.0
+    play bgs "bgs/Ambente Bosque Tenebros.opus" fadein 1.0
+    if tobyMuerto:
+        call screen bosquesombreadoct2
 
+    else:
+        call screen bosquesombreadost2
+
+label bosquecreepy:
+    call screen bosquecreepy
+
+label pablo2:
+    "Tengo que hacerlo"
+    jump bosquecreepy
+
+label entradacueva:
+    call screen entradacueva
+
+label bosquezorros:
+    call screen bosquezorros
+
+label campazorros:
+    call screen campazorros
+
+label madriguera:
     "Todavia no lo hice"
-    jump arroyo1
+    jump campazorros
 
 label represa1:
     "Todavia no lo hice"
