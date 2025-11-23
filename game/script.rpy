@@ -24,17 +24,26 @@ define tr = Character("Teniente Rosa")
 define l = Character("Luna")
 
 image black = "solid colors/black.png"
+image transparent = "transparent.png"
 image home1 = "maps/1.png"
 image home1_hover = "maps/1_hover.png"
 image mesa1 = "maps/2.png"
 image campa1 = "maps/3.png"
 image campa1_hover = "maps/3_hover.png"
+image campa2 = "maps/3b.png"
+image campa2_hover = "maps/3b_hover.png"
 image campb1 = "maps/4.png"
 image campb1_hover = "maps/4_hover.png"
+image campb2 = "maps/4b.png"
+image campb2_hover = "maps/4b_hover.png"
 image campc1 = "maps/5.png"
 image campc1_hover = "maps/5_hover.png"
+image campc2 = "maps/5b.png"
+image campc2_hover = "maps/5b_hover.png"
 image bosquesoleado = "maps/6.png"
 image bosquesoleado_hover = "maps/6_hover.png"
+image bosquesoleado2 = "maps/6b.png"
+image bosquesoleado2_hover = "maps/6b_hover.png"
 image bosquesombreado = "maps/7.png"
 image bosquesombreado_hover = "maps/7_hover.png"
 image bosquesombreadost = "maps/7b.png"
@@ -47,10 +56,16 @@ image bosquesombreadoct2 = "maps/7e.png"
 image bosquesombreadoct2_hover = "maps/7e_hover.png"
 image playa = "maps/8.png"
 image playa_hover = "maps/8_hover.png"
+image playa2 = "maps/8b.png"
+image playa2_hover = "maps/8b_hover.png"
 image carpageneral1 = "maps/9.png"
 image carpageneral1_hover = "maps/9_hover.png"
+image carpagral = "maps/9b.png"
+image carpagral_hover = "maps/9b_hover.png"
 image carpaluna1 = "maps/10.png"
 image carpaluna1_hover = "maps/10_hover.png"
+image carpaluna2 = "maps/10b.png"
+image carpaluna2_hover = "maps/10b_hover.png"
 image arroyo1 = "maps/13.png"
 image arroyo1_hover = "maps/13_hover.png"
 image bosquecreepy = "maps/14.png"
@@ -146,18 +161,29 @@ image luna seria = "characters/luna/seria.png"
 image luna tapando = "characters/luna/tapando.png"
 image luna v = "characters/luna/v.png"
 image luna v2 = "characters/luna/v2.png"
+image conejo musculoso 1 = "characters/conejo musculoso 1.png"
+image conejo musculoso 2 = "characters/conejo musculoso 2.png"
 
 image bgcampa1 = "backgrounds/3.png"
 image bgcampb1 = "backgrounds/4.png"
 image bgcampc1 = "backgrounds/5.png"
 image bgcarpageneral = "backgrounds/9.png"
 image bgbosquesoleado = "backgrounds/6.png"
+image bgbosquesoleado2 = "backgrounds/6b.png"
 image bgcarpaluna = "backgrounds/10.png"
 image bgarroyovacio = "backgrounds/13.png"
+image lunaobjetos = "maps/12.png"
+image gralobjetos = "maps/11.png"
 
 image conejito de mimbre = "objects/conejito_de_mimbre.png"
 image cania = "objects/cania.png"
 image balde = "objects/balde.png"
+image carta1 = "objects/carta1.png"
+image carta2 = "objects/carta2.png"
+image pocion mini = "objects/pocion_mini.png"
+image pocion invisibilidad = "objects/pocion_invisibilidad.png"
+image pocion vacia = "objects/pocion_vacia.png"
+image archivo = "objects/archivo.png"
 
 image arbusto1 = "animations/arbustos/arbusto1_1.png"
 image arbusto2 = "animations/arbustos/arbusto2_1.png"
@@ -320,6 +346,17 @@ transform posicion_arbusto4:
     alpha 1.0
     linear 0.5 ypos 0.7 alpha 1.0
 
+transform flip_out:
+    linear 0.5 xzoom 0
+
+transform flip_in:
+    xpos 0.5
+    ypos 0.5
+    xanchor 0.5
+    yanchor 0.5
+    xzoom 0
+    linear 0.5 xzoom 1
+
 init python:
     renpy.music.register_channel("bgs", "sfx", True)
 
@@ -353,6 +390,15 @@ screen home1:
         hotspot (53, 519, 588, 562) clicked Jump("mesa1")
         hotspot (934, 0, 399, 614) clicked Jump("campa1") hovered Play("sound", "audio/sfx/cierre.ogg")
 
+screen home2: 
+    on "show" action Function(play_bgs_once, "audio/bgs/Ambiente Campamento.opus", 1.0),
+    imagemap:
+        ground "home1"
+        hover "home1_hover"
+        
+        hotspot (53, 519, 588, 562) clicked Jump("mesa1")
+        hotspot (934, 0, 399, 614) clicked Jump("campa2") hovered Play("sound", "audio/sfx/cierre.ogg")
+
 screen campa1:
     on "show" action Function(play_bgs_once, "audio/bgs/Ambiente Campamento.opus", 1.0)
     imagemap:
@@ -365,6 +411,17 @@ screen campa1:
         hotspot (1292, 365, 350, 560) clicked Jump("clausjuancho1")
         hotspot (1668, 562, 247, 153) clicked Jump("campb1") hovered Play("sound", "audio/sfx/pasos 2.ogg")
 
+screen campa2:
+    on "show" action Function(play_bgs_once, "audio/bgs/Ambiente Campamento.opus", 1.0)
+    imagemap:
+        ground "campa2"
+        hover "campa2_hover"
+        
+        hotspot (63, 439, 269, 426) clicked Jump("home1") hovered Play("sound", "audio/sfx/cierre.ogg")
+        hotspot (485, 520, 250, 500) clicked Jump("rosa2")
+        hotspot (850, 378, 330, 320) clicked Jump("bosquesoleado2") hovered Play("sound", "audio/sfx/pasos 1.ogg")
+        hotspot (1668, 562, 247, 153) clicked Jump("campb2") hovered Play("sound", "audio/sfx/pasos 2.ogg")
+
 screen campb1:
     on "show" action Function(play_bgs_once, "audio/bgs/Ambiente Campamento.opus", 1.0)
     imagemap:
@@ -376,6 +433,16 @@ screen campb1:
         hotspot (1069, 625, 222, 372) clicked Jump("pablo1")
         hotspot (1530, 817, 388, 197) clicked Jump("campc1") hovered Play("sound", "audio/sfx/pasos 2.ogg")
 
+screen campb2:
+    on "show" action Function(play_bgs_once, "audio/bgs/Ambiente Campamento.opus", 1.0)
+    imagemap:
+        ground "campb2"
+        hover "campb2_hover"
+        
+        hotspot (0, 793, 290, 252) clicked Jump("campa2") hovered Play("sound", "audio/sfx/pasos 1.ogg")
+        hotspot (940, 480, 400, 588) clicked Jump("florbetty2")
+        hotspot (1530, 817, 388, 197) clicked Jump("campc2") hovered Play("sound", "audio/sfx/pasos 2.ogg")
+
 screen campc1:
     on "show" action Function(play_bgs_once, "audio/bgs/Ambiente Campamento.opus", 1.0)
     imagemap:
@@ -385,6 +452,15 @@ screen campc1:
         hotspot (5, 950, 300, 130) clicked Jump("campb1") hovered Play("sound", "audio/sfx/pasos 1.ogg")
         hotspot (530, 690, 145, 347) clicked Jump("felipe1")
         hotspot (1383, 759, 205, 315) clicked Jump("rosa1")
+
+screen campc2:
+    on "show" action Function(play_bgs_once, "audio/bgs/Ambiente Campamento.opus", 1.0)
+    imagemap:
+        ground "campc2"
+        hover "campc2_hover"
+        
+        hotspot (5, 950, 300, 130) clicked Jump("campb2") hovered Play("sound", "audio/sfx/pasos 1.ogg")
+        hotspot (530, 690, 145, 347) clicked Jump("carpagral")
 
 screen bosquesoleado1:
     imagemap:
@@ -397,6 +473,15 @@ screen bosquesoleado1:
         hotspot (825, 742, 222, 146) clicked Jump("bosquesombreado")
         hotspot (1129, 681, 341, 304) clicked Jump("arbusto3") hovered Play("sound", "audio/sfx/Arbusto 3.opus")
         hotspot (1516, 714, 390, 364) clicked Jump("arbusto4") hovered Play("sound", "audio/sfx/Arbusto 1.opus")
+
+screen bosquesoleado2:
+    imagemap:
+        ground "bosquesoleado2"
+        hover "bosquesoleado2_hover"
+        
+        hotspot (612, 959, 228, 118) clicked Jump("campa2")
+        hotspot (825, 742, 222, 146) clicked Jump("bosquesombreado2")
+        hotspot (1230, 550, 380, 515) clicked Jump("tinaypancho2")
 
 screen bosquesombreadoct:
     imagemap:
@@ -420,8 +505,8 @@ screen bosquesombreadoct2:
         ground "bosquesombreadoct2"
         hover "bosquesombreadoct2_hover"
         
-        hotspot (0, 0, 735, 690) clicked Jump("playa1")
-        hotspot (912, 850, 313, 236) clicked Jump("bosquesoleado1")
+        hotspot (0, 0, 735, 690) clicked Jump("playa2")
+        hotspot (912, 850, 313, 236) clicked Jump("bosquesoleado2")
         hotspot (914, 93, 196, 500) clicked Jump("arroyo1")
         hotspot (1111, 477, 463, 308) clicked Jump("zorromuerto")
 
@@ -430,8 +515,8 @@ screen bosquesombreadost2:
         ground "bosquesombreadost2"
         hover "bosquesombreadost2_hover"
         
-        hotspot (0, 0, 735, 690) clicked Jump("playa1")
-        hotspot (912, 850, 313, 236) clicked Jump("bosquesoleado1")
+        hotspot (0, 0, 735, 690) clicked Jump("playa2")
+        hotspot (912, 850, 313, 236) clicked Jump("bosquesoleado2")
         hotspot (914, 93, 215, 500) clicked Jump("arroyo1")
 
 screen playa1:
@@ -443,12 +528,29 @@ screen playa1:
         hotspot (622, 51, 848, 920) clicked Jump("carpaluna1")
         hotspot (1494, 870, 425, 208) clicked Jump("bosquesombreado")
 
+screen playa2:
+    imagemap:
+        ground "playa2"
+        hover "playa2_hover"
+        
+        hotspot (0, 500, 628, 580) clicked Jump("juanchoyclaus2")
+        hotspot (629, 51, 840, 920) clicked Jump("carpaluna2")
+        hotspot (1494, 870, 425, 208) clicked Jump("bosquesombreado2")
+
 screen carpaluna1:
     imagemap:
         ground "carpaluna1"
         hover "carpaluna1_hover"
         
         hotspot (776, 241, 345, 520) clicked Jump("luna1")
+
+screen carpaluna2:
+    imagemap:
+        ground "carpaluna2"
+        hover "carpaluna2_hover"
+        
+        hotspot (315, 140, 300, 610) clicked Jump("lunaobjetos")
+        hotspot (1300, 160, 280, 580) clicked Jump("playa2")
 
 screen arroyo1:
     imagemap:
@@ -461,6 +563,7 @@ screen arroyo1:
         hotspot (1714, 627, 205, 224) clicked Jump("represa1")
 
 screen bosquecreepy:
+    on "show" action Function(play_bgs_once, "audio/bgs/Ambente Bosque Tenebros.opus", 1.0)
     imagemap:
         ground "bosquecreepy"
         hover "bosquecreepy_hover"
@@ -470,14 +573,16 @@ screen bosquecreepy:
         hotspot (1213, 855, 165, 225) clicked Jump("arroyo1")
 
 screen entradacueva:
+    on "show" action Function(play_bgs_once, "audio/bgs/Ambente Bosque Tenebros.opus", 1.0)
     imagemap:
         ground "entradacueva"
         hover "entradacueva_hover"
         
-        hotspot (420, 540, 350, 360) clicked Jump("cueva1")
+        hotspot (426, 454, 418, 450) clicked Jump("conejosmusculosos")
         hotspot (1456, 510, 380, 370) clicked Jump("bosquecreepy")
 
 screen bosquezorros:
+    on "show" action Function(play_bgs_once, "audio/bgs/Bosque Soleado.opus", 1.0)
     imagemap:
         ground "bosquezorros"
         hover "bosquezorros_hover"
@@ -486,12 +591,22 @@ screen bosquezorros:
         hotspot (675, 885, 245, 195) clicked Jump("arroyo1")
 
 screen campazorros:
+    on "show" action Function(play_bgs_once, "audio/bgs/Bosque Soleado.opus", 1.0)
     imagemap:
         ground "campazorros"
         hover "campazorros_hover"
         
         hotspot (203, 433, 400, 510) clicked Jump("madriguera")
         hotspot (1310, 895, 610, 185) clicked Jump("bosquezorros")
+
+screen carpagral:
+    imagemap:
+        ground "carpagral"
+        hover "carpagral_hover"
+        
+        hotspot (45, 280, 350, 610) clicked Jump("gralobjetos")
+        hotspot (1575, 510, 345, 435) clicked Jump("cajafuerte")
+        hotspot (0, 935, 1920, 145) clicked Jump("campc2")
 
 screen juegopesca():
     if not tengopez1:
@@ -510,6 +625,74 @@ screen juegopesca():
             xpos 630 ypos 745
             action Function(pescar, 3)
 
+screen pociones():
+    if "invisibilidad" not in items:
+        imagebutton:
+            idle "objects/buttons/pocion1.png"
+            hover "objects/buttons/pocion1_hover.png"
+            xpos 970 ypos 300
+            action [AddToSet(items, "invisibilidad"), Return("pocion1")]
+    if "mini" not in items:
+        imagebutton:
+            idle "objects/buttons/pocion2.png"
+            hover "objects/buttons/pocion2_hover.png"
+            xpos 1220 ypos 300
+            action [AddToSet(items, "mini"), Return("pocion2")]
+    imagebutton:
+        idle "transparent"
+        hover "transparent"
+        xpos 0
+        ypos 0
+        xsize 325
+        ysize 1080
+        action Return("carpaluna2")
+    imagebutton:
+        idle "transparent"
+        hover "transparent"
+        xpos 326
+        ypos 680
+        xsize 1245
+        ysize 400
+        action Return("carpaluna2")
+    imagebutton:
+        idle "transparent"
+        hover "transparent"
+        xpos 1571
+        ypos 0
+        xsize 350
+        ysize 1080
+        action Return("carpaluna2")
+
+screen bombayarchivos():
+    if "bomba" not in items:
+        imagebutton:
+            idle "objects/buttons/bomba.png"
+            hover "objects/buttons/bomba_hover.png"
+            xpos 1163 ypos 180
+            action [AddToSet(items, "bomba"), Return("bomba")]
+    imagebutton:
+        idle "objects/buttons/archivos.png"
+        hover "objects/buttons/archivos_hover.png"
+        xpos 247
+        ypos 553
+        action Return("archivos")
+    imagebutton:
+        idle "transparent"
+        hover "transparent"
+        xpos 0
+        ypos 0
+        xsize 240
+        ysize 1080
+        action Return("carpagral")
+    imagebutton:
+        idle "transparent"
+        hover "transparent"
+        xpos 1635
+        ypos 0
+        xsize 285
+        ysize 1080
+        action Return("carpagral")
+
 label start:
     $ items = [] 
     $ evento1 = False
@@ -527,6 +710,7 @@ label start:
     $ tengopez1 = False
     $ tengopez2 = False
     $ tengopez3 = False
+    $ invisible = False
 
     scene black
     window hide
@@ -557,7 +741,10 @@ label mesa1:
     jump home1
 
 label home1:
-    call screen home1
+    if evento4:
+        call screen home2
+    else:
+        call screen home1
 
 label campa1:
     if felipeOrden:
@@ -592,23 +779,24 @@ label campc1:
     call screen campc1
 
 label andaapescarpibe:
+    $ bgs_started = False
     play bgs "bgs/Carpa Gral.opus"
     scene bgcarpageneral
     if evento3:
         show el general confundido with dissolve
-        eg "Soldado?"
-        n "Señor, debo informarle que cuando estuve en la playa ví una carpa y entré a investigar."
+        eg "¿Soldado?"
+        n "Señor, debo informarle que en la playa encontré una carpa desconocida, decidí investigarla."
         hide el general confundido
         show el general
-        eg "Y que encontró?"
+        eg "¿Qué encontró?"
         n "Adentro había una coneja blanca pero era distinta a nosotros."
+        nd "Una coneja más extraña, ella no iba vestida y estaba apoyada en sus cuatro patas."
         hide el general
         show el general disociado
-        nd "Ella no usaba ropa y se paraba en cuatro patas."
         eg "No puede ser..."
         hide el general disociado
         show el general enojado
-        eg "Lléveme a esta carpa de la que habla!"
+        eg "¡Lléveme de inmediato a la carpa de la que habla!"
         hide el general enojado with dissolve
         show black with dissolve
         stop bgs fadeout 1.0
@@ -624,7 +812,7 @@ label andaapescarpibe:
         np "¿Señor?"
         hide el general pensando
         show el general enojado
-        eg "Le toca pescar, soldado."
+        eg "Le toca pescar, soldado, consiga las herramientas con sus compañeros."
         n "Si, señor."
         $ evento1 = True
         hide el general enojado with dissolve
@@ -635,18 +823,18 @@ label tinapancho1:
     scene bgcampa1
 
     if evento3:
-        show tina criticando at left with dissolve
+        show tina nose2 at left with dissolve
         show pancho contemplando at right with dissolve
-        p "Una carpa brillante en la playa? Que te fumaste?"
-        nh "Les juro que es verdad!"
-        hide tina criticando
-        show tina nose2 at left
+        t "¿Encontraste una carpa rara y tu mejor idea fue entrar? "
+        p "Yo hubiera hecho lo mismo"
+        hide tina nose2
+        show tina criticando at left
         hide pancho contemplando
         show pancho at right
-        t "Seguro hay una explicación lógica, capaz que hay nativos en la isla"
+        t "Todos sabemos que no, así que no te mientas."
         hide tina nose2
         show tina at left
-        t "Pero igual cualquier civil que encuentres es mejor reportarselo al General."
+        t "Seguro hay una explicación lógica, tal vez hay nativos en la isla, igualmente es algo que debés informarle al General."
         hide tina with dissolve
         hide pancho with dissolve
     else:
@@ -825,7 +1013,7 @@ label pablo1:
                 pb "Estaba usándolo en el bosque para juntar frutas pero después escuché un ruido"
                 hide pablo
                 show pablo nose
-                pb "Y me dió miedo porque pensé que era un zorro así que me volví y dejé el balde"
+                pb "Y me dió miedo porque pensé que era un zorro así que me volví y dejé el balde. Debe seguir ahí... si ningún zorro lo robó."
                 hide pablo nose with dissolve
             jump campb1
         else: 
@@ -918,23 +1106,26 @@ label rosa1:
     else:
         if evento1:
             show teniente rosa with dissolve
-            tr "¿A pescar? Creo que vas a necesitar la caña y el balde."
+            tr "Tenga cuidado en el bosque, soldado. No baje la guardia."
             hide teniente rosa with dissolve
             jump campc1
         else:
             show teniente rosa with dissolve
-            tr "Hola, Nikki, ¿cómo estás?"
-            np "Estoy bien, Teniente Rosa. El General me llamó para hablar sobre algo, no sé de que se trata."
+            tr " ¿Ya le han asignado su tarea, soldado?"
+            np "No, señora"
             hide teniente rosa
             show teniente rosa alegre
-            tr "No te preocupes, no es nada malo, seguro te da la tarea de hoy."
+            tr "Pues no se quede ahí, vaya a hablar con el General."
+            n "Enseguida."
             hide teniente rosa alegre with dissolve
             jump campc1
 
 label bosquesoleado1:
     if not evento1:
         show teniente rosa with dissolve
-        tr "No podés ir al bosque todavía porque tenés que hablar con el General"
+        n "Teniente."
+        tr "Soldado, recuerde que el General lo llama."
+        n "Si, señora."
         hide teniente rosa with dissolve
         jump campa1
     else:
@@ -942,10 +1133,10 @@ label bosquesoleado1:
             if evento2:
                 if tobyMuerto:
                     scene bosquesombreadoct
-                    "Aún no puedo volver, necesitamos comida."
+                    "Todavía no puedo volver, necesito pescar primero."
                 else:
                     scene bosquesombreadost
-                    "Aún no puedo volver, necesitamos comida."
+                    "Todavía no puedo volver, necesito pescar primero."
                 jump bosquesombreado
     stop bgs fadeout 1.0
     play bgs "bgs/Bosque Soleado.opus" fadein 1.0
@@ -1042,7 +1233,7 @@ label bosquesombreado:
     if estoyEnLaPlaya:
         if not evento3:
             show playa
-            "Hay una carpa extraña en el medio de la playa..."
+            "Qué extraño, esa carpa no estaba ahí antes, debería investigar."
             hide playa
             jump playa1
 
@@ -1060,88 +1251,31 @@ label bosquesombreado:
         show toby with dissolve
 
         preg "Por... favor... Ayuda.. me..."
-        "Es un zorro herido!"
-        "*saca cuchillo*"
-        preg "No me mates..."
         "Un zorro enemigo... pero está herido..."
-        "Debería matarlo, pero quizas el sepa dónde se esconden los demás zorros..."
-        jump preguntasatoby
-
-menu preguntasatoby:
-    "¿Qué haces en nuestro territorio?":
-        jump pat1
-
-    "¿Quién sos? ¿Y de dónde venís?":
-        jump pat2
-
-    "¿Quién te envió?":
-        jump pat3
-
-    "¿Por qué debería perdonarte la vida?":
-        jump pat4
-
-label pat1:
-    n "¿Qué haces en nuestro territorio?"
-    n "Este lugar está rodeado de soldados conejos, te matarían en un instante."
-    preg "¡No, por favor! ¡Yo solo quiero escapar de esta isla!"
-    preg "¡Quiero volver a casa, quiero ver a mi novia, está embarazada!"
-    preg "Mirá, ésta es ella."
-    $ tobyNombre = True
-    tb "Su nombre es Maria, y yo me llamo Toby. Nos íbamos a casar cuando vuelva"
-
-    jump bosquesombreado1
-
-label pat2:
-    n "¿Quién sos? Y de dónde venís?"
-    $ tobyNombre = True
-    tb "Me llamo Toby, me trajeron acá para pelear pero yo no tengo intenciones de seguir. Me escape."
-    n "Un zorro desertor? Que patético"
-    tb "Por favor perdoname la vida y te doy un mapa"
-
-    jump bosquesombreado1
-
-label pat3:
-    n "¿Quién te envió?"
-    preg "¡Nadie!"
-    n "¡Mentira! ¡Estás buscando invadir nuestro campamento!"
-    preg "¡No! ¡No es verdad! ¡Solo quiero irme de esta isla!"
-    n "Mostrame alguna prueba"
-    preg "En mi bolsillo tengo un mapa."
-
-    jump bosquesombreado1
-
-label pat4:
-    n "¿Por qué debería perdonarte la vida?"
-    preg "Porque yo solo soy un pibe, como vos. Yo no quiero morir en esta guerra."
-    n "¡Vos sos un zorro! ¡No sos nada como yo!"
-    preg "Si, nací zorro, pero yo no elegí venir acá o pelear contra ustedes."
-    $ tobyNombre = True
-    tb "Me llamo Toby y tengo 20 años. Hace semanas que estoy planeando escapar."
-    n "¿Un zorro desertor? Que patético"
-    tb "Por favor perdoname la vida y te doy un mapa"
-
-    jump bosquesombreado1
-
-label bosquesombreado1:
-    $ items.append("mapa")
-
-    if tobyNombre:
-        "Toby te da un mapa que tiene una foto escrita del otro lado"
-
-    else:
-        "El zorro te da un mapa con una foto del otro lado. ¿Podemos confiar en el?"
-
-    n "Esta chica... Es una coneja"
-
-    if tobyNombre:
+        "Debería matarlo, pero quizás el sepa dónde se esconden los demás zorros..."
+        preg "No me mates..."
+        n "¿Por qué debería perdonarte la vida?"
+        preg "Porque yo solo quiero irme de esta isla, por favor, me llamo Toby y quiero volver a casa. Quiero ver a mi novia, está embarazada."
+        $ tobyNombre = True
+        n "¿Qué me asegura que estás diciendo la verdad?"
+        tb "Mira, esta es ella."
+        $ items.append("mapa")
+        show carta1 at truecenter
+        "Toby te da una foto..."
+        show carta1 at flip_out
+        with None
+        pause 0.5
+        show carta2 at flip_in
+        with None
+        pause 1.0
+        "... que tiene un mapa del otro lado."
+        hide carta1
+        hide carta2
+        np "Esta chica... es una coneja."
         tb "Si, es mi chica. Yo nunca quise matar conejos, yo no tengo ningún problema con ustedes."
-
-    else:
-        preg "Si, es mi chica. Yo nunca quise matar conejos, yo no tengo ningún problema con ustedes."
-
-    "Será que está diciendo la verdad? Se puede confiar en un zorro?"
-    "Si lo dejo con vida podrían descubrir nuestra base"
-    jump decisiontoby
+        "Será que está diciendo la verdad? Se puede confiar en un zorro?"
+        "Pero, si lo dejo con vida podrían descubrir nuestra base..."
+        jump decisiontoby
 
 menu decisiontoby:
     "MATAR AL ZORRO CON UN TIRO":
@@ -1162,16 +1296,9 @@ menu decisiontoby:
 
 label mataratoby:
     n "Perdón, pero sos un zorro y no puedo confiar en vos."
-    
-    if tobyNombre:
-        tb "Noo, ¡por favor!"
-
-    else:
-        preg "Noo, ¡por favor!"
-
+    tb "Noo, ¡por favor!"
     "*le pega un tiro*"
     hide toby
-
     "Era lo mejor para todos, rápido y sin dolor."
     $ evento2 = True
     $ tobyMuerto = True
@@ -1181,14 +1308,8 @@ label mataratoby:
 label liberaratoby:
     n "Está bien, te voy a dejar ir. Pero no quiero verte de vuelta por estas partes."
     "*le saca la pierna de la trampa*"
-    
-    if tobyNombre:
-        tb "¡Muchas gracias, soldado! ¡No lo olvidaré!"
-
-    else:
-        preg "¡Muchas gracias, soldado! ¡No lo olvidaré!"
-
-    n "Escapate antes que te vean mis compañeros."
+    tb "¡Muchas gracias, soldado! ¡No lo olvidaré!"
+    n "Huye antes que te vean mis compañeros."
     hide toby
     $ evento2 = True
 
@@ -1197,19 +1318,9 @@ label liberaratoby:
 label ayudaratoby:
     n "Te voy a ayudar porque yo tampoco elegí pelear en esta guerra."
     n "Me llamo Nikki y tengo 24 años."
-
-    "*le saca la pierna de la trampa*"
-    
-    if tobyNombre:
-        tb "¡Muchas gracias, Nikki! ¡No lo olvidaré!"
-
-    else:
-        tb "Yo me llamo Toby y tengo 20"
-        tb "¡Muchas gracias, Nikki! ¡No lo olvidaré!"
-
+    tb "¡Muchas gracias, Nikki! ¡No lo olvidaré!"
     "*lo cura*"
     n "¿Podés caminar?"
-    tb "Si, masomenos."
     n "Bien, escapate antes que te vean mis compañeros."
     hide toby
     $ evento2 = True
@@ -1218,39 +1329,20 @@ label ayudaratoby:
 
 label heriratoby:
     n "No puedo dejarte ir hasta que me digas dónde está el campamento de los zorros."
-    
-    if tobyNombre:
-        tb "No puedo decirte eso, pondría en peligro a los demás."
-
-    else:
-        preg "No puedo decirte eso, pondría en peligro a los demás."
-
+    tb "No puedo decirte eso, pondría en peligro a los demás."
     "*lo hiere*"
-
-    if tobyNombre:
-        tb "¡No, por favor! ¡No lo hagas!"
-
-    else:
-        preg "¡No, por favor! ¡No lo hagas!"
-
+    tb "¡No, por favor! ¡No lo hagas!"
     n "¡Decime donde está el campamento!"
+    "*lo hiere*"
     n "Si no me decís te voy a llevar a nuestra base y ellos son peores que yo."
-
-    if tobyNombre:
-        tb "¡No te voy a decir nada!"
-
-    else:
-        preg "¡No te voy a decir nada!"
-
+    tb "¡No te voy a decir nada!"
     n "Entonces no me dejas opción..."
-
     hide toby
     show black with dissolve
-    play sound "audio/sfx/Escena tortura prueba 1.wav"
-    $ renpy.pause() 
+    $ renpy.pause(2.0) 
 
     show bosquesombreadoct
-    n "Bien, es momento de volver a mi tarea, esos peces no se van a pescar solos."
+    "Para ser desertor era bastante leal."
 
     $ evento2 = True
     $ tobyMuerto = True
@@ -1259,11 +1351,13 @@ label heriratoby:
     # Finaliza el juego:
 
 label zorromuerto:
-    scene bosquesombreadoct
-    "Un zorro muerto, nada importante."
     if evento4:
+        scene bosquesombreadoct2
+        "Un zorro muerto, nada importante."
         jump bosquesombreado2
     else:
+        scene bosquesombreadoct
+        "Un zorro muerto, nada importante."
         jump bosquesombreado
 
 label playa1:
@@ -1303,7 +1397,7 @@ label tengo3peces:
         pause 2.0
     scene fondo pesca
     show agua pesca
-    nc "Ya tenemos suficientes peces por ahora."
+    nc "Bien, esos deberían ser suficientes peces para unos días."
     hide agua pesca
     $ yaPesque = True
     jump playa1
@@ -1326,7 +1420,7 @@ label luna1:
     preg "Pero ¿cuál camino será el que te harán caminar?"
     hide luna senialando
     show luna manos abiertas
-    preg "¿Qué hilos tensarán?¿Qué final esta historia te presentará?"
+    preg "¿Qué hilos tensarán? ¿Qué final esta historia te presentará?"
 
     jump preguntasluna
 
@@ -1400,12 +1494,12 @@ label pregluna3:
 
 label luna2:
     show luna
-    l "Tus demás dudas deberán quedar en el aire me temo, pues el tiempo, aunque imperceptible, nos es desfavorable."
+    l "Tus demás dudas deberán quedar en el aire me temo, pues el tiempo nos es desfavorable."
     l "No quedará nada de esta tierra luego de cumplir su sentencia."
     hide luna
     show luna seria
     l "El despiadado cosmos engañará nuestros ojos, la tierra temblará y rugirá."
-    l "Nada de este impuro suelo quedará..."
+    l "En horas este suelo será tragado por las aguas."
     hide luna seria
     show luna senialando
     l "Y tú, Nikki, tienes una decisión que tomar, abre tu mente y divide tus caminos."
@@ -1454,10 +1548,10 @@ label luna2:
                     jump carpaluna1
 
 label peleaconelgral:
+    stop bgs fadeout 1.0
+    play bgs "bgs/Ambiet Int carpa Luna.opus" fadein 1.0
     scene bgcarpaluna with dissolve
-
     show el general mirando with dissolve
-
     eg "No la veo por ningún lado..."
     hide el general mirando
     show el general pensando
@@ -1479,9 +1573,20 @@ label peleaconelgral:
     hide el general disociado
     show el general enojado
     eg "Lo siento, Nikki. No puedo dejar que nadie mas lo tenga..."
+    show el general enojado:
+        zoom 1.25
+        xalign 0.5
+        yalign 0.5
     nm "¿Qué está haciendo?"
+    show el general enojado:
+        zoom 1.5
+        xalign 0.5
+        yalign 0.5
     nh "¡Alejese de mi!"
     "*forcejeo*"
+    stop bgs fadeout 1.0
+    play bgs "bgs/Ambiente Arroyo-Presa.opus" fadein 1.0
+    $ playArroyoPresa = True
     show black with dissolve
     show bgarroyovacio with dissolve
     np "Que bién que pude escaparme de ese lunático. Pero ahora..."
@@ -1489,7 +1594,14 @@ label peleaconelgral:
     $ evento4 = True
     jump arroyo1
 
+##############################################################################################
+
 label arroyo1:
+    if not playArroyoPresa:
+        stop bgs fadeout 1.0
+        play bgs "bgs/Ambiente Arroyo-Presa.opus" fadein 1.0
+    $ playArroyoPresa = False
+    $ bgs_started = False
     call screen arroyo1
 
 label bosquesombreado2:
@@ -1500,6 +1612,34 @@ label bosquesombreado2:
 
     else:
         call screen bosquesombreadost2
+
+label bosquesoleado2:
+    stop bgs fadeout 1.0
+    play bgs "bgs/Bosque Soleado.opus" fadein 1.0
+    call screen bosquesoleado2
+
+label tinaypancho2:
+    scene bgbosquesoleado2
+    show tina alegre at right with dissolve
+    show pancho alegre at left with dissolve
+    t "¡Nikki! ¡Que bien que estas a salvo!"
+    hide pancho alegre
+    show pancho at left
+    p "¿Ahora que hiciste, Nikki?"
+    hide tina alegre
+    show tina at right
+    p "El General está rojo del enojo, ordenó tu captura."
+    np "¿Eso significa que me van a llevar?"
+    hide pancho
+    show pancho guinio at left
+    p "Si"
+    t "¡No! Por eso estamos avisándote, no debes volver al campamento."
+    hide pancho guinio
+    show pancho contemplando at left
+    p "Es una lastima que no tengas algo asi como una poción de invisibilidad..."
+    hide tina with dissolve
+    hide pancho contemplando with dissolve
+    jump bosquesoleado2
 
 label bosquecreepy:
     call screen bosquecreepy
@@ -1517,20 +1657,141 @@ label bosquezorros:
 label campazorros:
     call screen campazorros
 
+label conejosmusculosos:
+    "Todavia no lo hice"
+    jump entradacueva
+
 label madriguera:
     "Todavia no lo hice"
     jump campazorros
+
+label playa2:
+    stop bgs fadeout 1.0
+    play bgs "bgs/Ambiente Playa.opus" fadein 1.0
+    call screen playa2
+
+label juanchoyclaus2:
+    scene playa
+    show juancho boca abierta
+    j "¿Nikki?"
+    hide juancho boca abierta
+    show juancho alegre at left
+    show claus alegre at right
+    c "¡Nikki! Que bueno verte..."
+    nd "¿No se supone que tendrían que llevarme con el General?"
+    hide juancho alegre
+    show juancho chistoso at left
+    j "Se supone que no deberíamos estar pescando..."
+    hide claus alegre
+    show claus travieso at right
+    c "Estamos a mano, sino hablas, no hablamos."
+    hide juancho chistoso
+    show juancho alegre at left
+    nt "De todos modo, ¿Por qué están pescando?"
+    hide claus travieso
+    show claus chistoso at right
+    c "No es asunto tuyo"
+    j "No seas así Claus, estamos intentando pescar más ejemplares de ese arcoíris, su carne era exquisita."
+    nc "Bien... sigan con lo suyo entonces."
+    hide claus chistoso
+    show claus travieso at right
+    c "Igual."
+    hide claus travieso with dissolve
+    hide juancho alegre with dissolve
+    jump playa2
+
+label carpaluna2:
+    stop bgs fadeout 1.0
+    play bgs "bgs/Ambiet Int carpa Luna.opus" fadein 1.0
+    call screen carpaluna2
+
+label lunaobjetos:
+    scene lunaobjetos
+    $ result = renpy.call_screen("pociones")
+    jump expression result
+
+label pocion1:
+    show pocion invisibilidad at truecenter
+    "¡Es una poción de invisibilidad! Mejor la conservo."
+    hide pocion invisibilidad
+    jump lunaobjetos
+
+label pocion2:
+    show pocion mini at truecenter
+    "Esta poción te vuelve mas pequeño, podría servirme en algún momento."
+    hide pocion mini
+    jump lunaobjetos
 
 label represa1:
     "Todavia no lo hice"
     jump arroyo1
 
+label campa2:
+    if "invisibilidad" not in items:
+        scene bgbosquesoleado2
+        show tina nose with dissolve
+        t "Nikki, no entres, te van a meter preso. En serio."
+        hide tina nose with dissolve
+        jump bosquesoleado2
+
+    else:
+        if invisible:
+            call screen campa2
+        else:
+            scene bgbosquesoleado2
+            show pocion invisibilidad at truecenter
+            with dissolve
+            pause 0.25
+            show pocion vacia at truecenter
+            with dissolve
+            "¡Tomaste la poción de invisibilidad! Ahora sos invisible."
+            hide pocion vacia with dissolve
+            show tina nose2 at right with dissolve
+            show pancho at left with dissolve
+            t "¿Nikki?"
+            p "Que cosas raras que andan pasando últimamente..."
+            hide tina nose2 with dissolve
+            hide pancho with dissolve
+            $ invisible = True
+            call screen campa2
 
 
 
-    return
 
 
+        
+
+label campb2:
+    call screen campb2
+
+label campc2:
+    call screen campc2
+
+label carpagral:
+    stop bgs fadeout 1.0
+    play bgs "bgs/Carpa Gral.opus" fadein 1.0
+    $ bgs_started = False
+    call screen carpagral
+
+label cajafuerte:
+    "Todavía no lo hice"
+
+label gralobjetos:
+    scene gralobjetos
+    $ result = renpy.call_screen("bombayarchivos")
+    jump expression result
+
+label bomba:
+    show bomba at truecenter
+    "Voy a guardar esta bomba porque podría servirme..."
+    hide bomba
+    jump gralobjetos
+
+label archivos:
+    show archivo at truecenter
+    "Parece ser un código, pero ¿para que?"
+    hide archivo
+    jump gralobjetos
 
     # This ends the game.
     return
