@@ -235,47 +235,47 @@ style choice_button_text is default:
 ## The quick menu is displayed in-game to provide easy access to the out-of-
 ## game menus.
 
-screen quick_menu():
+##screen quick_menu():
 
     ## Ensure this appears on top of other screens.
-    zorder 100
+    ##zorder 100
 
-    if quick_menu:
+    ##if quick_menu:
 
-        hbox:
-            style_prefix "quick"
-            style "quick_menu"
+        ##hbox:
+            ##style_prefix "quick"
+            ##style "quick_menu"
 
-            textbutton _("Back") action Rollback()
-            textbutton _("History") action ShowMenu('history')
-            textbutton _("Skip") action Skip() alternate Skip(fast=True, confirm=True)
-            textbutton _("Auto") action Preference("auto-forward", "toggle")
-            textbutton _("Save") action ShowMenu('save')
-            textbutton _("Q.Save") action QuickSave()
-            textbutton _("Q.Load") action QuickLoad()
-            textbutton _("Prefs") action ShowMenu('preferences')
+            ##textbutton _("Back") action Rollback()
+            ##textbutton _("History") action ShowMenu('history')
+            ##textbutton _("Skip") action Skip() alternate Skip(fast=True, confirm=True)
+            ##textbutton _("Auto") action Preference("auto-forward", "toggle")
+            ##textbutton _("Save") action ShowMenu('save')
+            ##textbutton _("Q.Save") action QuickSave()
+            ##textbutton _("Q.Load") action QuickLoad()
+            ##textbutton _("Prefs") action ShowMenu('preferences')
 
 
 ## This code ensures that the quick_menu screen is displayed in-game, whenever
 ## the player has not explicitly hidden the interface.
-init python:
-    config.overlay_screens.append("quick_menu")
+##init python:
+    ##config.overlay_screens.append("quick_menu")
 
-default quick_menu = True
+##default quick_menu = True
 
-style quick_menu is hbox
-style quick_button is default
-style quick_button_text is button_text
+##style quick_menu is hbox
+##style quick_button is default
+##style quick_button_text is button_text
 
-style quick_menu:
-    xalign 0.5
-    yalign 1.0
+##style quick_menu:
+    ##xalign 0.5
+    ##yalign 1.0
 
-style quick_button:
-    properties gui.button_properties("quick_button")
+##style quick_button:
+    ##properties gui.button_properties("quick_button")
 
-style quick_button_text:
-    properties gui.text_properties("quick_button")
+##style quick_button_text:
+    ##properties gui.text_properties("quick_button")
 
 
 ################################################################################
@@ -363,6 +363,8 @@ style navigation_button_text:
 ## https://www.renpy.org/doc/html/screen_special.html#main-menu
 
 screen main_menu():
+
+    on "show" action Play("music", "audio/Musica-menu.ogg", loop=True)
 
     ## This ensures that any other menu screen is replaced.
     tag menu

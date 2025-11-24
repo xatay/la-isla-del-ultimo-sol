@@ -22,6 +22,11 @@ define b = Character("Betty")
 define pb = Character("Pablo")
 define tr = Character("Teniente Rosa")
 define l = Character("Luna")
+define g = Character("Goliat")
+define a = Character("Alejo")
+define zl = Character("Lirio")
+define zv = Character("Vanesa")
+define zt = Character("Titán")
 
 image black = "solid colors/black.png"
 image transparent = "transparent.png"
@@ -68,14 +73,22 @@ image carpaluna2 = "maps/10b.png"
 image carpaluna2_hover = "maps/10b_hover.png"
 image arroyo1 = "maps/13.png"
 image arroyo1_hover = "maps/13_hover.png"
+image arroyo2 = "maps/13b.png"
+image arroyo2_hover = "maps/13b_hover.png"
 image bosquecreepy = "maps/14.png"
 image bosquecreepy_hover = "maps/14_hover.png"
 image entradacueva = "maps/15.png"
 image entradacueva_hover = "maps/15_hover.png"
+image entradacueva2 = "maps/15b.png"
+image entradacueva2_hover = "maps/15b_hover.png"
+image cueva1 = "maps/16.png"
+image cueva2 = "maps/16b.png"
 image bosquezorros = "maps/17.png"
 image bosquezorros_hover = "maps/17_hover.png"
 image campazorros = "maps/18.png"
 image campazorros_hover = "maps/18_hover.png"
+image represa1 = "maps/20.png"
+image represa2 = "maps/20b.png"
 
 image side nikki = "characters/nikki/default.png"
 image side decepcionado = "characters/nikki/decepcionado.png"
@@ -161,8 +174,23 @@ image luna seria = "characters/luna/seria.png"
 image luna tapando = "characters/luna/tapando.png"
 image luna v = "characters/luna/v.png"
 image luna v2 = "characters/luna/v2.png"
-image conejo musculoso 1 = "characters/conejo musculoso 1.png"
-image conejo musculoso 2 = "characters/conejo musculoso 2.png"
+image goliat = "characters/conejo musculoso 1.png"
+image alejo = "characters/conejo musculoso 2.png"
+image lirio = "characters/lirio.png"
+image vanesa = "characters/vanesa.png"
+image titan = "characters/titan.png"
+image toby = "characters/toby/default.png"
+image toby alegre = "characters/toby/alegre.png"
+image toby dolor = "characters/toby/dolor.png"
+image toby miedo = "characters/toby/miedo.png"
+image toby sorprendido = "characters/toby/sorprendido.png"
+image toby tenso = "characters/toby/tenso.png"
+image toby timido = "characters/toby/timido.png"
+image toby2 = "characters/toby/default2.png"
+image toby chistoso = "characters/toby/chistoso.png"
+image toby guinio = "characters/toby/guinio.png"
+image toby mirando = "characters/toby/mirando.png"
+image toby tierno = "characters/toby/tierno.png"
 
 image bgcampa1 = "backgrounds/3.png"
 image bgcampb1 = "backgrounds/4.png"
@@ -174,6 +202,10 @@ image bgcarpaluna = "backgrounds/10.png"
 image bgarroyovacio = "backgrounds/13.png"
 image lunaobjetos = "maps/12.png"
 image gralobjetos = "maps/11.png"
+image bgbosquecreepy = "backgrounds/14.png"
+image bgbosquezorros = "backgrounds/17.png"
+image cajafuerte = "maps/24.png"
+image cajaabierta = "maps/24b.png"
 
 image conejito de mimbre = "objects/conejito_de_mimbre.png"
 image cania = "objects/cania.png"
@@ -184,6 +216,10 @@ image pocion mini = "objects/pocion_mini.png"
 image pocion invisibilidad = "objects/pocion_invisibilidad.png"
 image pocion vacia = "objects/pocion_vacia.png"
 image archivo = "objects/archivo.png"
+image amuleto1 = "objects/amuleto1.png"
+image amuleto2 = "objects/amuleto2.png"
+image amuleto3 = "objects/amuleto3.png"
+image amuleto4 = "objects/amuleto4.png"
 
 image arbusto1 = "animations/arbustos/arbusto1_1.png"
 image arbusto2 = "animations/arbustos/arbusto2_1.png"
@@ -381,6 +417,7 @@ init python:
         else:
             renpy.show_screen("juegopesca")
 
+
 screen home1: 
     on "show" action Function(play_bgs_once, "audio/bgs/Ambiente Campamento.opus", 1.0),
     imagemap:
@@ -418,7 +455,7 @@ screen campa2:
         hover "campa2_hover"
         
         hotspot (63, 439, 269, 426) clicked Jump("home1") hovered Play("sound", "audio/sfx/cierre.ogg")
-        hotspot (485, 520, 250, 500) clicked Jump("rosa2")
+        hotspot (465, 440, 300, 617) clicked Jump("rosa2")
         hotspot (850, 378, 330, 320) clicked Jump("bosquesoleado2") hovered Play("sound", "audio/sfx/pasos 1.ogg")
         hotspot (1668, 562, 247, 153) clicked Jump("campb2") hovered Play("sound", "audio/sfx/pasos 2.ogg")
 
@@ -562,6 +599,16 @@ screen arroyo1:
         hotspot (1480, 170, 250, 350) clicked Jump("bosquezorros")
         hotspot (1714, 627, 205, 224) clicked Jump("represa1")
 
+screen arroyo2:
+    imagemap:
+        ground "arroyo2"
+        hover "arroyo2_hover"
+        
+        hotspot (455, 855, 360, 220) clicked Jump("bosquesombreado2")
+        hotspot (274, 240, 500, 340) clicked Jump("bosquecreepy")
+        hotspot (1480, 170, 250, 350) clicked Jump("bosquezorros")
+        hotspot (1714, 627, 205, 224) clicked Jump("represa2")
+
 screen bosquecreepy:
     on "show" action Function(play_bgs_once, "audio/bgs/Ambente Bosque Tenebros.opus", 1.0)
     imagemap:
@@ -569,7 +616,7 @@ screen bosquecreepy:
         hover "bosquecreepy_hover"
         
         hotspot (1213, 476, 150, 250) clicked Jump("entradacueva")
-        hotspot (936, 616, 280, 443) clicked Jump("pablo2")
+        hotspot (780, 635, 420, 440) clicked Jump("pablo2")
         hotspot (1213, 855, 165, 225) clicked Jump("arroyo1")
 
 screen entradacueva:
@@ -607,6 +654,13 @@ screen carpagral:
         hotspot (45, 280, 350, 610) clicked Jump("gralobjetos")
         hotspot (1575, 510, 345, 435) clicked Jump("cajafuerte")
         hotspot (0, 935, 1920, 145) clicked Jump("campc2")
+
+screen represa1:
+    imagemap:
+        ground "represa1"
+        hover "represa1"
+        
+        hotspot (0, 355, 1920, 725) clicked Jump("volarlarepresa")
 
 screen juegopesca():
     if not tengopez1:
@@ -693,6 +747,7 @@ screen bombayarchivos():
         ysize 1080
         action Return("carpagral")
 
+
 label start:
     $ items = [] 
     $ evento1 = False
@@ -711,6 +766,7 @@ label start:
     $ tengopez2 = False
     $ tengopez3 = False
     $ invisible = False
+    $ mini = False
 
     scene black
     window hide
@@ -1255,10 +1311,15 @@ label bosquesombreado:
         "Debería matarlo, pero quizás el sepa dónde se esconden los demás zorros..."
         preg "No me mates..."
         n "¿Por qué debería perdonarte la vida?"
+        hide toby
+        show toby sorprendido
         preg "Porque yo solo quiero irme de esta isla, por favor, me llamo Toby y quiero volver a casa. Quiero ver a mi novia, está embarazada."
         $ tobyNombre = True
         n "¿Qué me asegura que estás diciendo la verdad?"
+        hide toby sorprendido
+        show toby timido
         tb "Mira, esta es ella."
+        hide toby timido
         $ items.append("mapa")
         show carta1 at truecenter
         "Toby te da una foto..."
@@ -1271,10 +1332,16 @@ label bosquesombreado:
         "... que tiene un mapa del otro lado."
         hide carta1
         hide carta2
+        show toby timido
         np "Esta chica... es una coneja."
+        hide toby timido
+        show toby tenso
         tb "Si, es mi chica. Yo nunca quise matar conejos, yo no tengo ningún problema con ustedes."
+        hide toby tenso
+        show toby
         "Será que está diciendo la verdad? Se puede confiar en un zorro?"
         "Pero, si lo dejo con vida podrían descubrir nuestra base..."
+        hide toby
         jump decisiontoby
 
 menu decisiontoby:
@@ -1295,10 +1362,13 @@ menu decisiontoby:
         jump heriratoby
 
 label mataratoby:
+    show toby
     n "Perdón, pero sos un zorro y no puedo confiar en vos."
+    hide toby
+    show toby dolor
     tb "Noo, ¡por favor!"
     "*le pega un tiro*"
-    hide toby
+    hide toby dolor
     "Era lo mejor para todos, rápido y sin dolor."
     $ evento2 = True
     $ tobyMuerto = True
@@ -1306,38 +1376,53 @@ label mataratoby:
     jump bosquesombreado
 
 label liberaratoby:
-    n "Está bien, te voy a dejar ir. Pero no quiero verte de vuelta por estas partes."
+    show toby
+    ng "Está bien, te voy a dejar ir. Pero no quiero verte de vuelta por estas partes."
+    hide toby
+    show toby alegre
     "*le saca la pierna de la trampa*"
     tb "¡Muchas gracias, soldado! ¡No lo olvidaré!"
-    n "Huye antes que te vean mis compañeros."
-    hide toby
+    nc "Huye antes que te vean mis compañeros."
+    hide toby alegre
     $ evento2 = True
 
     jump bosquesombreado
 
 label ayudaratoby:
-    n "Te voy a ayudar porque yo tampoco elegí pelear en esta guerra."
-    n "Me llamo Nikki y tengo 24 años."
+    show toby
+    np "Te voy a ayudar porque yo tampoco elegí pelear en esta guerra."
+    hide toby
+    show toby alegre
+    nc "Me llamo Nikki y tengo 24 años."
     tb "¡Muchas gracias, Nikki! ¡No lo olvidaré!"
     "*lo cura*"
-    n "¿Podés caminar?"
-    n "Bien, escapate antes que te vean mis compañeros."
-    hide toby
+    ng "¿Podés caminar?"
+    nc "Bien, escapate antes que te vean mis compañeros."
+    hide toby alegre
     $ evento2 = True
 
     jump bosquesombreado
 
 label heriratoby:
+    show toby
     n "No puedo dejarte ir hasta que me digas dónde está el campamento de los zorros."
     tb "No puedo decirte eso, pondría en peligro a los demás."
+    hide toby
+    show toby dolor
     "*lo hiere*"
     tb "¡No, por favor! ¡No lo hagas!"
+    hide toby dolor
+    show toby
     n "¡Decime donde está el campamento!"
+    hide toby
+    show toby dolor
     "*lo hiere*"
     n "Si no me decís te voy a llevar a nuestra base y ellos son peores que yo."
+    hide toby dolor
+    show toby sorprendido
     tb "¡No te voy a decir nada!"
     n "Entonces no me dejas opción..."
-    hide toby
+    hide toby sorprendido with dissolve
     show black with dissolve
     $ renpy.pause(2.0) 
 
@@ -1602,7 +1687,10 @@ label arroyo1:
         play bgs "bgs/Ambiente Arroyo-Presa.opus" fadein 1.0
     $ playArroyoPresa = False
     $ bgs_started = False
-    call screen arroyo1
+    if "amuleto2" in items:
+        call screen arroyo2
+    else:
+        call screen arroyo1
 
 label bosquesombreado2:
     stop bgs fadeout 1.0
@@ -1614,6 +1702,14 @@ label bosquesombreado2:
         call screen bosquesombreadost2
 
 label bosquesoleado2:
+    if invisible:
+        if "amuleto1" in items:
+            $ invisible = False
+            $ items.remove("invisibilidad")
+        else:
+            scene bgcampa1
+            "Se está terminando el efecto... debería aprovecharlo."
+            jump campa2
     stop bgs fadeout 1.0
     play bgs "bgs/Bosque Soleado.opus" fadein 1.0
     call screen bosquesoleado2
@@ -1642,28 +1738,178 @@ label tinaypancho2:
     jump bosquesoleado2
 
 label bosquecreepy:
-    call screen bosquecreepy
+    if "amuleto3" not in items:
+        if mini:
+            scene entradacueva
+            "Ya llegamos hasta acá, vamos a entrar en la cueva."
+            jump entradacueva
+        else:
+            call screen bosquecreepy
+    else:
+        call screen bosquecreepy
 
 label pablo2:
-    "Tengo que hacerlo"
-    jump bosquecreepy
+    if "amuleto3" in items:
+        if mini:
+            scene bgbosquecreepy
+            show pablo with dissolve
+            nc "Gracias, Pablo, por toda tu ayuda."
+            hide pablo
+            show pablo nose2
+            pb "De nada, Nikki. Me alegra que ya seas de estatura normal."
+            hide pablo nose with dissolve
+            $ mini = False
+            jump bosquecreepy
+        else:
+            scene bgbosquecreepy
+            show pablo nose with dissolve
+            pb "Deberíamos juntarnos mas seguido."
+            hide pablo nose with dissolve
+            jump bosquecreepy
+
+    if "mini" in items:
+        scene bgbosquecreepy
+        show pablo with dissolve
+        nc "Tengo una forma de entrar."
+        pb "¿Cómo?"
+        hide pablo
+        show pablo sorprendido
+        nt "Voy a tomar una poción que me va a hacer pequeño y vos me vas a llevar en tu bolsillo."
+        pb "?"
+        hide pablo sorprendido with dissolve
+        show pocion mini at truecenter
+        with dissolve
+        pause 0.25
+        show pocion vacia at truecenter
+        with dissolve
+        "¡Tomaste la poción de miniatura! Te estás volviendo pequeño..."
+        hide pocion vacia with dissolve
+        show pablo nose2 with dissolve
+        pb "Wow, no sabía que se podía hacer eso..."
+        $ mini = True
+
+    else:
+        scene bgbosquecreepy
+        show pablo sorprendido with dissolve
+        pb "Nikki... No esperaba verte por estos lados."
+        np "El General me quiso atacar"
+        hide pablo sorprendido
+        show pablo enojado
+        pb "Ya sabía que era malvado... Y vos no viste lo que hacen en la cueva..."
+        jump bosquecreepy
 
 label entradacueva:
-    call screen entradacueva
+    if mini:
+        call screen entradacueva
+    else:
+        scene bgbosquecreepy
+        show pablo nose with dissolve
+        pb "Nikki... No vayas, te van a capturar."
+        hide pablo nose with dissolve
+        jump bosquecreepy
 
 label bosquezorros:
-    call screen bosquezorros
+    if "amuleto1" in items and "amuleto2" in items and "amuleto3" in items:
+        if carta == 'diablo':
+            scene bgbosquezorros
+            show lirio at left with dissolve
+            show titan with dissolve
+            show vanesa at right with dissolve
+            zt "Un conejo infiltrado."
+            n "Ya no soy un soldado."
+            zv "Un conejo desertor, patético. No podemos arriesgarnos..."
+            nm "¡Por favor, no!"
+            show black with dissolve
+            jump peorfinal
+                    
+        if carta == 'muerte':
+            scene bgbosquezorros
+            show toby2 with dissolve
+            tb "No deberías estar en esta zona, Nikki."
+            nc "¿Toby? Conseguiste, ayuda, que bueno."
+            hide toby2
+            show toby tierno
+            tb "No se puede pedir menos, tenemos un gran médico."
+            nd "¿No deberías estar en reposo?"
+            tb "Jeje, digamos que tengo asuntos pendientes."
+            n "¿Qué asuntos?"
+            hide toby tierno
+            show toby guinio
+            tb "Salir de esta isla maldita es uno."
+            n "¿Cómo?"
+            hide toby guinio
+            show toby mirando
+            tb "¡Seguime!"
+            hide toby mirando with dissolve
+            show black with dissolve
+            jump finalbueno
+
+        if carta == 'torre':
+            call screen bosquezorros
+
+        if carta == 'carro':
+            call screen bosquezorros
+    else:
+        if "amuleto2" in items:
+            scene arroyo2
+            "Ese es territorio de zorros, mejor evitar esa zona..."
+            jump arroyo1
+        else:
+            scene bgarroyovacio
+            "Ese es territorio de zorros, mejor evitar esa zona..."
+            jump arroyo1
 
 label campazorros:
     call screen campazorros
 
 label conejosmusculosos:
-    "Todavia no lo hice"
-    jump entradacueva
+    scene entradacueva2
+    show goliat at left with dissolve
+    show alejo at right with dissolve
+
+    g "¿Te fuiste al puente a llorar?"
+    a "Que debilucho..."
+    show pablo enojado with dissolve
+    pb "¡Ya les dije que fui a tomar aire!"
+    hide pablo enojado
+    show pablo nose
+    g "Si, seguro... Volvé a trabajar, llorón."
+    hide goliat with dissolve
+    hide alejo with dissolve
+    hide pablo nose with dissolve
+    jump cueva1
+
+label cueva1:
+    scene cueva1
+    nd "No sabía que el General tenía a los prisioneros trabajando en las minas..."
+    show pablo mirando with dissolve
+    pb "Siempre te dije que él es un malvado."
+    n "Pablo, ¿ves ese pedazo de amuleto que está ahí?"
+    hide pablo mirando
+    show pablo sorprendido
+    pb "Si, lo veo. ¿Qué es?"
+    n "Eso no es importante, necesito que me lo alcances."
+    hide pablo sorprendido
+    show amuleto3 at truecenter with dissolve
+    "Un pedazo de amuleto, ¿dónde estarán el resto?"
+    hide amuleto3 with dissolve
+    show pablo nose2 with dissolve
+    pb "¿Para qué es eso, Nikki?"
+    ng "Después te digo..."
+    hide pablo nose2 with dissolve
+    $ items.append("amuleto3")
+    jump bosquecreepy
 
 label madriguera:
-    "Todavia no lo hice"
-    jump campazorros
+    if carta == 'torre':
+        scene campazorros
+        show black with dissolve
+        jump finalmalo
+
+    if carta == 'carro':
+        scene campazorros
+        show black with dissolve
+        jump mejorfinal
 
 label playa2:
     stop bgs fadeout 1.0
@@ -1723,7 +1969,30 @@ label pocion2:
     jump lunaobjetos
 
 label represa1:
-    "Todavia no lo hice"
+    call screen represa1
+
+label volarlarepresa:
+    if "bomba" in items:
+        scene represa1
+        show bomba at truecenter with dissolve
+        "Usas la bomba para hacer explotar la represa."
+        play sound "audio/sfx/Explosion.ogg"
+        scene represa2
+        hide bomba with dissolve
+        "Hay algo en la tierra..."
+        show amuleto2 at truecenter with dissolve
+        "Un pedazo de amuleto, ¿dónde estarán los otros?"
+        hide amuleto2 with dissolve
+        $ items.append("amuleto2")
+        jump arroyo1
+    else:
+        scene represa1
+        "Esta presa la construyó nuestro ejercito dejando sin agua toda la zona... me gustaría destruirla."
+        jump arroyo1
+
+label represa2:
+    scene represa2
+    $ renpy.pause()
     jump arroyo1
 
 label campa2:
@@ -1739,6 +2008,7 @@ label campa2:
             call screen campa2
         else:
             scene bgbosquesoleado2
+            with None
             show pocion invisibilidad at truecenter
             with dissolve
             pause 0.25
@@ -1755,26 +2025,54 @@ label campa2:
             $ invisible = True
             call screen campa2
 
-
-
-
-
-        
+label rosa2:
+    scene bgcampa1
+    show teniente rosa confundida with dissolve
+    tr "Oh, que extraño, debe ser el viento..."
+    hide teniente rosa confundida with dissolve
+    jump campa2
 
 label campb2:
     call screen campb2
 
+label florbetty2:
+    scene bgcampb1
+    show betty mirando at left with dissolve
+    show flor seria at right with dissolve
+    b "Pobre Nikki ¿Qué habrá pasado? ¿Estará bien?"
+    f "Es Nikki, claramente está bien... espero."
+    hide betty mirando with dissolve
+    hide flor seria with dissolve
+    jump campb2
+
 label campc2:
+    $ felipeQueja = False
     call screen campc2
 
 label carpagral:
+    if not felipeQueja:
+        scene bgcampc1
+        show teniente felipe mirando with dissolve
+        tf "Ese conejo impertinente..."
+        hide teniente felipe with dissolve
+        $ felipeQueja = True
     stop bgs fadeout 1.0
     play bgs "bgs/Carpa Gral.opus" fadein 1.0
     $ bgs_started = False
     call screen carpagral
 
 label cajafuerte:
-    "Todavía no lo hice"
+    show cajafuerte
+    $ renpy.pause()
+    if "amuleto1" not in items:
+        show cajaabierta
+        show amuleto1 at truecenter
+        "Un pedazo de amuleto, ¿dónde estará el resto?"
+        hide amuleto1
+        hide cajaabierta
+        $ items.append("amuleto1")
+    hide cajafuerte
+    jump carpagral
 
 label gralobjetos:
     scene gralobjetos
@@ -1793,5 +2091,18 @@ label archivos:
     hide archivo
     jump gralobjetos
 
-    # This ends the game.
+label peorfinal:
+    "El peor final"
+    return
+
+label finalmalo:
+    "El final malo"
+    return
+
+label finalbueno:
+    "El final bueno"
+    return
+
+label mejorfinal:
+    "El mejor final"
     return
