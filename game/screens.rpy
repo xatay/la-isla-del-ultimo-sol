@@ -364,7 +364,7 @@ style navigation_button_text:
 
 screen main_menu():
 
-    on "show" action Play("music", "audio/Musica-menu.ogg", loop=True)
+    $ renpy.music.play("audio/Theme6- Int Carpa Luna (o cuando aparece en el arroyo).ogg", channel="music", loop=True)
 
     ## This ensures that any other menu screen is replaced.
     tag menu

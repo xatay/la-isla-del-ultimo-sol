@@ -27,6 +27,8 @@ define a = Character("Alejo")
 define zl = Character("Lirio")
 define zv = Character("Vanesa")
 define zt = Character("Titán")
+define z = Character("Zorro")
+define gf = Character("General Federico")
 
 image black = "solid colors/black.png"
 image transparent = "transparent.png"
@@ -75,6 +77,8 @@ image arroyo1 = "maps/13.png"
 image arroyo1_hover = "maps/13_hover.png"
 image arroyo2 = "maps/13b.png"
 image arroyo2_hover = "maps/13b_hover.png"
+image arroyo3 = "maps/13c.png"
+image arroyo3_hover = "maps/13c_hover.png"
 image bosquecreepy = "maps/14.png"
 image bosquecreepy_hover = "maps/14_hover.png"
 image entradacueva = "maps/15.png"
@@ -89,6 +93,10 @@ image campazorros = "maps/18.png"
 image campazorros_hover = "maps/18_hover.png"
 image represa1 = "maps/20.png"
 image represa2 = "maps/20b.png"
+image cartas = "maps/25.png"
+image cartas_hover = "maps/25_hover.png"
+image cueva3 = "maps/16c.png"
+image cueva4 = "maps/16d.png"
 
 image side nikki = "characters/nikki/default.png"
 image side decepcionado = "characters/nikki/decepcionado.png"
@@ -191,6 +199,7 @@ image toby chistoso = "characters/toby/chistoso.png"
 image toby guinio = "characters/toby/guinio.png"
 image toby mirando = "characters/toby/mirando.png"
 image toby tierno = "characters/toby/tierno.png"
+image general federico = "characters/general federico.png"
 
 image bgcampa1 = "backgrounds/3.png"
 image bgcampb1 = "backgrounds/4.png"
@@ -206,6 +215,13 @@ image bgbosquecreepy = "backgrounds/14.png"
 image bgbosquezorros = "backgrounds/17.png"
 image cajafuerte = "maps/24.png"
 image cajaabierta = "maps/24b.png"
+image 25a = "backgrounds/25a.png"
+image 25b = "backgrounds/25b.png"
+image 25c = "backgrounds/25c.png"
+image 25d = "backgrounds/25d.png"
+image madriguera = "backgrounds/19.png"
+image 3b = "backgrounds/3b.png"
+image 23 = "backgrounds/23.png"
 
 image conejito de mimbre = "objects/conejito_de_mimbre.png"
 image cania = "objects/cania.png"
@@ -220,6 +236,15 @@ image amuleto1 = "objects/amuleto1.png"
 image amuleto2 = "objects/amuleto2.png"
 image amuleto3 = "objects/amuleto3.png"
 image amuleto4 = "objects/amuleto4.png"
+image fosforo1 = "objects/fosforo1.png"
+image fosforo2 = "objects/fosforo2.png"
+image carta dorso = "objects/carta_dorso.png"
+image carta zoom = "objects/carta_dorso2.png"
+image carta carro = "objects/carta_carro.png"
+image carta torre = "objects/carta_torre.png"
+image carta diablo = "objects/carta_diablo.png"
+image carta muerte = "objects/carta_muerte.png"
+
 
 image arbusto1 = "animations/arbustos/arbusto1_1.png"
 image arbusto2 = "animations/arbustos/arbusto2_1.png"
@@ -356,6 +381,48 @@ image animation_pez3:
     pause 0.15
     repeat False
 
+image dial_turn1:
+    xpos 973 ypos 270
+    xanchor 0.5 yanchor 0.5
+    "objects/perilla.png"
+    linear 0.5 rotate -75
+
+image dial_turn2:
+    xpos 973 ypos 270
+    xanchor 0.5 yanchor 0.5
+    "objects/perilla2.png"
+    linear 0.5 rotate -40
+
+image dial_turn3:
+    xpos 973 ypos 270
+    xanchor 0.5 yanchor 0.5
+    "objects/perilla3.png"
+    linear 0.5 rotate 40
+
+transform mover_carta1(duration=1.0):
+    xpos 205
+    ypos 295
+    zoom 1.0 
+    linear duration xpos 721 ypos 173 zoom 1.312
+
+transform mover_carta2(duration=1.0):
+    xpos 605
+    ypos 305
+    zoom 1.0 
+    linear duration xpos 721 ypos 173 zoom 1.312
+
+transform mover_carta3(duration=1.0):
+    xpos 990
+    ypos 310
+    zoom 1.0 
+    linear duration xpos 721 ypos 173 zoom 1.312
+
+transform mover_carta4(duration=1.0):
+    xpos 1385
+    ypos 315
+    zoom 1.0 
+    linear duration xpos 721 ypos 173 zoom 1.312
+
 transform move_across:
     xpos 0.4
     linear 7.0 xpos 0.0 
@@ -393,6 +460,11 @@ transform flip_in:
     xzoom 0
     linear 0.5 xzoom 1
 
+transform move_fosforo:
+    xpos 1235
+    ypos 425
+    linear 1.5 xpos 855 ypos 750
+
 init python:
     renpy.music.register_channel("bgs", "sfx", True)
 
@@ -408,6 +480,7 @@ init python:
 init python:
     def pescar(num):
         renpy.hide_screen("juegopesca")
+        renpy.play("sfx/PESCADO PESCADO 2.opus", channel="sound")
         renpy.show(f"animation_pez{num}")
 
         globals()[f"tengopez{num}"] = True
@@ -417,6 +490,7 @@ init python:
         else:
             renpy.show_screen("juegopesca")
 
+default dial_step = 0
 
 screen home1: 
     on "show" action Function(play_bgs_once, "audio/bgs/Ambiente Campamento.opus", 1.0),
@@ -506,8 +580,8 @@ screen bosquesoleado1:
         
         hotspot (22, 735, 356, 333) clicked Jump("arbusto1") hovered Play("sound", "audio/sfx/Arbusto 1.opus")
         hotspot (427, 658, 323, 296) clicked Jump("arbusto2") hovered Play("sound", "audio/sfx/Arbusto 2.opus")
-        hotspot (612, 959, 228, 118) clicked Jump("campa1")
-        hotspot (825, 742, 222, 146) clicked Jump("bosquesombreado")
+        hotspot (612, 959, 228, 118) clicked Jump("campa1")  hovered Play("sound", "audio/sfx/pasos 1.ogg")
+        hotspot (825, 742, 222, 146) clicked Jump("bosquesombreado")  hovered Play("sound", "audio/sfx/pasos 2.ogg")
         hotspot (1129, 681, 341, 304) clicked Jump("arbusto3") hovered Play("sound", "audio/sfx/Arbusto 3.opus")
         hotspot (1516, 714, 390, 364) clicked Jump("arbusto4") hovered Play("sound", "audio/sfx/Arbusto 1.opus")
 
@@ -516,8 +590,8 @@ screen bosquesoleado2:
         ground "bosquesoleado2"
         hover "bosquesoleado2_hover"
         
-        hotspot (612, 959, 228, 118) clicked Jump("campa2")
-        hotspot (825, 742, 222, 146) clicked Jump("bosquesombreado2")
+        hotspot (612, 959, 228, 118) clicked Jump("campa2") hovered Play("sound", "audio/sfx/pasos 1.ogg")
+        hotspot (825, 742, 222, 146) clicked Jump("bosquesombreado2")  hovered Play("sound", "audio/sfx/pasos 2.ogg")
         hotspot (1230, 550, 380, 515) clicked Jump("tinaypancho2")
 
 screen bosquesombreadoct:
@@ -525,8 +599,8 @@ screen bosquesombreadoct:
         ground "bosquesombreadoct"
         hover "bosquesombreadoct_hover"
         
-        hotspot (0, 0, 735, 690) clicked Jump("playa1")
-        hotspot (912, 850, 313, 236) clicked Jump("bosquesoleado1")
+        hotspot (0, 0, 735, 690) clicked Jump("playa1") hovered Play("sound", "audio/sfx/Arbusto 1.opus")
+        hotspot (912, 850, 313, 236) clicked Jump("bosquesoleado1") hovered Play("sound", "audio/sfx/pasos 1.ogg")
         hotspot (1097, 477, 463, 308) clicked Jump("zorromuerto")
 
 screen bosquesombreadost:
@@ -534,17 +608,17 @@ screen bosquesombreadost:
         ground "bosquesombreadost"
         hover "bosquesombreadost_hover"
         
-        hotspot (0, 0, 735, 690) clicked Jump("playa1")
-        hotspot (912, 850, 313, 236) clicked Jump("bosquesoleado1")
+        hotspot (0, 0, 735, 690) clicked Jump("playa1") hovered Play("sound", "audio/sfx/Arbusto 1.opus")
+        hotspot (912, 850, 313, 236) clicked Jump("bosquesoleado1") hovered Play("sound", "audio/sfx/pasos 1.ogg")
 
 screen bosquesombreadoct2:
     imagemap:
         ground "bosquesombreadoct2"
         hover "bosquesombreadoct2_hover"
         
-        hotspot (0, 0, 735, 690) clicked Jump("playa2")
-        hotspot (912, 850, 313, 236) clicked Jump("bosquesoleado2")
-        hotspot (914, 93, 196, 500) clicked Jump("arroyo1")
+        hotspot (0, 0, 735, 690) clicked Jump("playa2") hovered Play("sound", "audio/sfx/Arbusto 1.opus")
+        hotspot (912, 850, 313, 236) clicked Jump("bosquesoleado2") hovered Play("sound", "audio/sfx/pasos 1.ogg")
+        hotspot (914, 93, 196, 500) clicked Jump("arroyo1") hovered Play("sound", "audio/sfx/Arbusto 2.opus")
         hotspot (1111, 477, 463, 308) clicked Jump("zorromuerto")
 
 screen bosquesombreadost2:
@@ -552,27 +626,27 @@ screen bosquesombreadost2:
         ground "bosquesombreadost2"
         hover "bosquesombreadost2_hover"
         
-        hotspot (0, 0, 735, 690) clicked Jump("playa2")
-        hotspot (912, 850, 313, 236) clicked Jump("bosquesoleado2")
-        hotspot (914, 93, 215, 500) clicked Jump("arroyo1")
+        hotspot (0, 0, 735, 690) clicked Jump("playa2") hovered Play("sound", "audio/sfx/Arbusto 1.opus")
+        hotspot (912, 850, 313, 236) clicked Jump("bosquesoleado2") hovered Play("sound", "audio/sfx/pasos 1.ogg")
+        hotspot (914, 93, 215, 500) clicked Jump("arroyo1") hovered Play("sound", "audio/sfx/Arbusto 2.opus")
 
 screen playa1:
     imagemap:
         ground "playa"
         hover "playa_hover"
         
-        hotspot (0, 670, 449, 406) clicked Jump("pescar")
-        hotspot (622, 51, 848, 920) clicked Jump("carpaluna1")
-        hotspot (1494, 870, 425, 208) clicked Jump("bosquesombreado")
+        hotspot (0, 670, 449, 406) clicked Jump("pescar") hovered Play("sound", "audio/bgs/AMBIENTE PESCA.opus")
+        hotspot (622, 51, 848, 920) clicked Jump("carpaluna1") hovered Play("sound", "audio/sfx/Sonido para el espejo.opus")
+        hotspot (1494, 870, 425, 208) clicked Jump("bosquesombreado") hovered Play("sound", "audio/sfx/Pasos Arena 2.opus")
 
 screen playa2:
     imagemap:
         ground "playa2"
         hover "playa2_hover"
         
-        hotspot (0, 500, 628, 580) clicked Jump("juanchoyclaus2")
-        hotspot (629, 51, 840, 920) clicked Jump("carpaluna2")
-        hotspot (1494, 870, 425, 208) clicked Jump("bosquesombreado2")
+        hotspot (0, 500, 628, 580) clicked Jump("juanchoyclaus2") hovered Play("sound", "audio/bgs/AMBIENTE PESCA.opus")
+        hotspot (629, 51, 840, 920) clicked Jump("carpaluna2") hovered Play("sound", "audio/sfx/Sonido para el espejo.opus")
+        hotspot (1494, 870, 425, 208) clicked Jump("bosquesombreado2") hovered Play("sound", "audio/sfx/Pasos Arena 2.opus")
 
 screen carpaluna1:
     imagemap:
@@ -587,27 +661,35 @@ screen carpaluna2:
         hover "carpaluna2_hover"
         
         hotspot (315, 140, 300, 610) clicked Jump("lunaobjetos")
-        hotspot (1300, 160, 280, 580) clicked Jump("playa2")
+        hotspot (1300, 160, 280, 580) clicked Jump("playa2") hovered Play("sound", "audio/sfx/Sonido para el espejo.opus")
 
 screen arroyo1:
     imagemap:
         ground "arroyo1"
         hover "arroyo1_hover"
         
-        hotspot (455, 855, 360, 220) clicked Jump("bosquesombreado2")
-        hotspot (274, 240, 500, 340) clicked Jump("bosquecreepy")
-        hotspot (1480, 170, 250, 350) clicked Jump("bosquezorros")
-        hotspot (1714, 627, 205, 224) clicked Jump("represa1")
+        hotspot (455, 855, 360, 220) clicked Jump("bosquesombreado2") hovered Play("sound", "audio/sfx/pasos 1.ogg")
+        hotspot (274, 240, 500, 340) clicked Jump("bosquecreepy") hovered Play("sound", "audio/sfx/Arbusto 1.opus")
+        hotspot (1714, 627, 205, 224) clicked Jump("represa1") hovered Play("sound", "audio/sfx/pasos 2.ogg")
 
 screen arroyo2:
     imagemap:
         ground "arroyo2"
         hover "arroyo2_hover"
         
-        hotspot (455, 855, 360, 220) clicked Jump("bosquesombreado2")
-        hotspot (274, 240, 500, 340) clicked Jump("bosquecreepy")
-        hotspot (1480, 170, 250, 350) clicked Jump("bosquezorros")
-        hotspot (1714, 627, 205, 224) clicked Jump("represa2")
+        hotspot (455, 855, 360, 220) clicked Jump("bosquesombreado2") hovered Play("sound", "audio/sfx/Pasos mojados 1.opus")
+        hotspot (274, 240, 500, 340) clicked Jump("bosquecreepy") hovered Play("sound", "audio/sfx/Arbusto 1.opus")
+        hotspot (1714, 627, 205, 224) clicked Jump("represa2") hovered Play("sound", "audio/sfx/Pasos mojados 3.opus")
+
+screen arroyo3:
+    imagemap:
+        ground "arroyo3"
+        hover "arroyo3_hover"
+        
+        hotspot (455, 855, 360, 220) clicked Jump("bosquesombreado2") hovered Play("sound", "audio/sfx/Pasos mojados 1.opus")
+        hotspot (274, 240, 500, 340) clicked Jump("bosquecreepy") hovered Play("sound", "audio/sfx/Arbusto 1.opus")
+        hotspot (1480, 170, 250, 350) clicked Jump("bosquezorros") hovered Play("sound", "audio/sfx/Arbusto 2.opus")
+        hotspot (1714, 627, 205, 224) clicked Jump("represa2") hovered Play("sound", "audio/sfx/Pasos mojados 3.opus")
 
 screen bosquecreepy:
     on "show" action Function(play_bgs_once, "audio/bgs/Ambente Bosque Tenebros.opus", 1.0)
@@ -615,9 +697,9 @@ screen bosquecreepy:
         ground "bosquecreepy"
         hover "bosquecreepy_hover"
         
-        hotspot (1213, 476, 150, 250) clicked Jump("entradacueva")
+        hotspot (1213, 476, 150, 250) clicked Jump("entradacueva") hovered Play("sound", "audio/sfx/Pasos duros 1.opus")
         hotspot (780, 635, 420, 440) clicked Jump("pablo2")
-        hotspot (1213, 855, 165, 225) clicked Jump("arroyo1")
+        hotspot (1213, 855, 165, 225) clicked Jump("arroyo1") hovered Play("sound", "audio/sfx/Pasos duros 2.opus")
 
 screen entradacueva:
     on "show" action Function(play_bgs_once, "audio/bgs/Ambente Bosque Tenebros.opus", 1.0)
@@ -626,7 +708,7 @@ screen entradacueva:
         hover "entradacueva_hover"
         
         hotspot (426, 454, 418, 450) clicked Jump("conejosmusculosos")
-        hotspot (1456, 510, 380, 370) clicked Jump("bosquecreepy")
+        hotspot (1456, 510, 380, 370) clicked Jump("bosquecreepy") hovered Play("sound", "audio/sfx/Pasos duros 2.opus")
 
 screen bosquezorros:
     on "show" action Function(play_bgs_once, "audio/bgs/Bosque Soleado.opus", 1.0)
@@ -634,8 +716,8 @@ screen bosquezorros:
         ground "bosquezorros"
         hover "bosquezorros_hover"
         
-        hotspot (888, 647, 150, 185) clicked Jump("campazorros")
-        hotspot (675, 885, 245, 195) clicked Jump("arroyo1")
+        hotspot (888, 647, 150, 185) clicked Jump("campazorros") hovered Play("sound", "audio/sfx/pasos 2.ogg")
+        hotspot (675, 885, 245, 195) clicked Jump("arroyo1") hovered Play("sound", "audio/sfx/pasos 1.ogg")
 
 screen campazorros:
     on "show" action Function(play_bgs_once, "audio/bgs/Bosque Soleado.opus", 1.0)
@@ -644,7 +726,7 @@ screen campazorros:
         hover "campazorros_hover"
         
         hotspot (203, 433, 400, 510) clicked Jump("madriguera")
-        hotspot (1310, 895, 610, 185) clicked Jump("bosquezorros")
+        hotspot (1310, 895, 610, 185) clicked Jump("bosquezorros") hovered Play("sound", "audio/sfx/pasos 1.ogg")
 
 screen carpagral:
     imagemap:
@@ -661,6 +743,16 @@ screen represa1:
         hover "represa1"
         
         hotspot (0, 355, 1920, 725) clicked Jump("volarlarepresa")
+
+screen luna_cartas:
+    imagemap:
+        ground "cartas"
+        hover "cartas_hover"
+        
+        hotspot (200, 285, 400, 665) clicked Jump("carta_1")
+        hotspot (601, 285, 385, 665) clicked Jump("carta_2")
+        hotspot (986, 285, 385, 665) clicked Jump("carta_3")
+        hotspot (1371, 285, 395, 665) clicked Jump("carta_4")
 
 screen juegopesca():
     if not tengopez1:
@@ -686,12 +778,14 @@ screen pociones():
             hover "objects/buttons/pocion1_hover.png"
             xpos 970 ypos 300
             action [AddToSet(items, "invisibilidad"), Return("pocion1")]
+            hover_sound "sfx/Clink Vidrio 2.opus"
     if "mini" not in items:
         imagebutton:
             idle "objects/buttons/pocion2.png"
             hover "objects/buttons/pocion2_hover.png"
             xpos 1220 ypos 300
             action [AddToSet(items, "mini"), Return("pocion2")]
+            hover_sound "sfx/Clink Vidrio 3.opus"
     imagebutton:
         idle "transparent"
         hover "transparent"
@@ -747,6 +841,40 @@ screen bombayarchivos():
         ysize 1080
         action Return("carpagral")
 
+screen safe_screen():
+
+    add "maps/24.png"
+
+    if dial_step == 0:
+        add "objects/perilla.png" xpos 790 ypos 90
+        imagebutton:
+            xpos 1045
+            ypos 190
+            idle "transparent"
+            hover "transparent"
+            xsize 105
+            ysize 90
+            action Jump("rotate_dial")
+    elif dial_step == 1:
+        add "objects/perilla2.png" xpos 790 ypos 90
+        imagebutton:
+            xpos 1005
+            ypos 115
+            idle "transparent"
+            hover "transparent"
+            xsize 85
+            ysize 95
+            action Jump("rotate_dial")
+    elif dial_step == 2:
+        add "objects/perilla3.png" xpos 790 ypos 90
+        imagebutton:
+            xpos 835
+            ypos 115
+            idle "transparent"
+            hover "transparent"
+            xsize 100
+            ysize 95
+            action Jump("rotate_dial")
 
 label start:
     $ items = [] 
@@ -768,6 +896,8 @@ label start:
     $ invisible = False
     $ mini = False
 
+    play music "Musica-menu.ogg" fadein 1.0
+
     scene black
     window hide
     show text "{font=Inclitodo.ttf}{size=50}{color=#ffffff}Hace tres meses que llegué a esta isla...{/color}{/size}{/font}" at truecenter with fade
@@ -788,7 +918,9 @@ label start:
     hide animation_luna with dissolve
     hide text with dissolve
 
-    $renpy.movie_cutscene("video/1.webm")
+    play movie "video/1.webm"
+    pause 6.5
+    stop music fadeout 1.0
     jump home1
 
 label mesa1:
@@ -1367,11 +1499,13 @@ label mataratoby:
     hide toby
     show toby dolor
     tb "Noo, ¡por favor!"
-    "*le pega un tiro*"
+    play sound "sfx/Disparo.opus"
     hide toby dolor
+    show bosquesombreadoct
     "Era lo mejor para todos, rápido y sin dolor."
     $ evento2 = True
     $ tobyMuerto = True
+    hide bosquesombreadoct
 
     jump bosquesombreado
 
@@ -1452,6 +1586,8 @@ label playa1:
     call screen playa1
 
 label pescar:
+    stop bgs fadeout 1.0
+    play bgs "bgs/AMBIENTE PESCA.opus" fadein 1.0
     if "caña" not in items:
         if "balde" not in items:
             scene fondo pesca
@@ -1593,44 +1729,87 @@ label luna2:
     l "Oh, aquel que será, acércate y toma una carta! Construye tu potencial, liberate y construye tu futuro!"
     nm "¿Cómo sabes mi nombre?"
 
+    play sound "sfx/Barajando Cartas.opus"
     $renpy.movie_cutscene("video/luna.webm")
+    play sound "sfx/Barajando Cartas.opus"
+    $renpy.movie_cutscene("video/luna_cartas.webm")
+    call screen luna_cartas
 
+label carta_1:
+    scene 25a
+    show carta dorso at mover_carta1(1.2)
+    pause 1.2
+    hide carta dorso
+    show carta zoom at truecenter
+    show carta zoom at flip_out
+    pause 0.5
+    hide carta zoom
+    jump tucarta
+
+label carta_2:
+    scene 25b
+    show carta dorso at mover_carta2(1.2)
+    pause 1.2
+    hide carta dorso
+    show carta zoom at truecenter
+    show carta zoom at flip_out
+    pause 0.5
+    hide carta zoom
+    jump tucarta
+
+label carta_3:
+    scene 25c
+    show carta dorso at mover_carta3(1.2)
+    pause 1.2
+    hide carta dorso
+    show carta zoom at truecenter
+    show carta zoom at flip_out
+    pause 0.5
+    hide carta zoom
+    jump tucarta
+
+label carta_4:
+    scene 25d
+    show carta dorso at mover_carta4(1.2)
+    pause 1.2
+    hide carta dorso
+    show carta zoom at truecenter
+    show carta zoom at flip_out
+    pause 0.5
+    hide carta zoom
+    jump tucarta
+
+label tucarta:
     if carta == 'torre':
-        $renpy.movie_cutscene("video/carta_torre.webm")
-        show image "animations/carta_torre.png" zorder 5
+        show carta torre at flip_in
         l "En un solitario camino has sellado tu destino, tu falta se nota. Lavaste tus manos, tu piel y pelaje limpios a simple vista pero, ¿lo estas?"
         l "¿Tiene salvación tu alma?, no es algo que pueda responder, pero tal vez…"
         l "Muestra tu valor, aquel quien avanza en piezas, encuéntrate y reúne tus faltas, solo ahí descubriremos los vacíos que cargas, tal vez esta tierra así pueda ser salvada."
         l "Nada más se te revelará en este encuentro, pero si así nos encontramos, así nuevamente nos cruzaremos, confía en que los hilos incitarán a cruzarnos otra vez."
         $ evento3 = True
         jump carpaluna1
+    elif carta == 'muerte':
+        show carta muerte at flip_in
+        l "Veo un proceso que inicia, pero falta el más importante paso ¿Qué tempo irás marcando?"
+        l "Aquel que cambio trae, no olvides que tus acciones consecuencias tienen, que tú caos no te frene."
+        $ evento3 = True
+        jump carpaluna1
+    elif carta == 'diablo':
+        show carta diablo at flip_in
+        l "En tu alma se cierne un oscuro paso, que con tempo lento avanza sin descanso, mientras te corta caminos y endurece tu alma condenada"
+        l "Tal vez te falta esperanza, tal vez pensás que nada te falta, solo vos sabés que falla, pero, ¿Podrás acaso enmendar lo rasgado?"
+        l "¿Tiene salvación tu contaminado corazón?"
+        l "Nada más se te revelará en este encuentro, pero si  así nos encontramos, así nuevamente nos cruzaremos, confía en que los hilos incitarán a cruzarnos otra vez."
+        $ evento3 = True
+        jump carpaluna1
     else:
-        if carta == 'muerte':
-            $renpy.movie_cutscene("video/carta_muerte.webm")
-            show image "animations/carta_muerte.png" zorder 5
-            l "Veo un proceso que inicia, pero falta el más importante paso ¿Qué tempo irás marcando?"
-            l "Aquel que cambio trae, no olvides que tus acciones consecuencias tienen, que tú caos no te frene."
-            $ evento3 = True
-            jump carpaluna1
-        else:
-            if carta == 'diablo':
-                $renpy.movie_cutscene("video/carta_diablo.webm")
-                show image "animations/carta_diablo.png" zorder 5
-                l "En tu alma se cierne un oscuro paso, que con tempo lento avanza sin descanso, mientras te corta caminos y endurece tu alma condenada"
-                l "Tal vez te falta esperanza, tal vez pensás que nada te falta, solo vos sabés que falla, pero, ¿Podrás acaso enmendar lo rasgado?"
-                l "¿Tiene salvación tu contaminado corazón?"
-                l "Nada más se te revelará en este encuentro, pero si  así nos encontramos, así nuevamente nos cruzaremos, confía en que los hilos incitarán a cruzarnos otra vez."
-                $ evento3 = True
-                jump carpaluna1
-            else:
-                if carta == 'carro':
-                    show image "animations/carta_carro.png" zorder 5
-                    l "A favor tuyo se encuentra el mundo, tu constancia y la pureza de tu alma traen luz a tu paso al avanzar."
-                    l "El ocio y la indistinción son tus enemigos más notables, no concedas sus maliciosos deseos."
-                    l "Ahora retírate, aquel cuyo camino existe en piezas, ve a juntarlas para por fin ver a dónde te llevan."
-                    l "Si así nos encontramos, así nuevamente nos cruzaremos, confía en que los hilos incitarán a cruzarnos otra vez."
-                    $ evento3 = True
-                    jump carpaluna1
+        show carta carro at flip_in
+        l "A favor tuyo se encuentra el mundo, tu constancia y la pureza de tu alma traen luz a tu paso al avanzar."
+        l "El ocio y la indistinción son tus enemigos más notables, no concedas sus maliciosos deseos."
+        l "Ahora retírate, aquel cuyo camino existe en piezas, ve a juntarlas para por fin ver a dónde te llevan."
+        l "Si así nos encontramos, así nuevamente nos cruzaremos, confía en que los hilos incitarán a cruzarnos otra vez."
+        $ evento3 = True
+        jump carpaluna1
 
 label peleaconelgral:
     stop bgs fadeout 1.0
@@ -1687,7 +1866,9 @@ label arroyo1:
         play bgs "bgs/Ambiente Arroyo-Presa.opus" fadein 1.0
     $ playArroyoPresa = False
     $ bgs_started = False
-    if "amuleto2" in items:
+    if "amuleto1" in items and "amuleto2" in items and "amuleto3" in items:
+        call screen arroyo3
+    elif "amuleto2" in items:
         call screen arroyo2
     else:
         call screen arroyo1
@@ -1746,10 +1927,6 @@ label bosquecreepy:
         else:
             call screen bosquecreepy
     else:
-        call screen bosquecreepy
-
-label pablo2:
-    if "amuleto3" in items:
         if mini:
             scene bgbosquecreepy
             show pablo with dissolve
@@ -1759,107 +1936,129 @@ label pablo2:
             pb "De nada, Nikki. Me alegra que ya seas de estatura normal."
             hide pablo nose with dissolve
             $ mini = False
-            jump bosquecreepy
+
+        call screen bosquecreepy
+            
+label pablo2:
+    if "amuleto3" in items:
+        scene bgbosquecreepy
+        show pablo nose with dissolve
+        pb "Deberíamos juntarnos mas seguido."
+        hide pablo nose with dissolve
+        jump bosquecreepy
+    else:
+        if "mini" in items:
+            scene bgbosquecreepy
+            show pablo with dissolve
+            nc "Ahora sé cómo entrar, encontré esta poción, me hará pequeño."
+            pb "Perdón, no entiendo."
+            hide pablo
+            show pablo sorprendido
+            nt "Voy a necesitar tu ayuda, me vas a meter en tu bolsillo y entramos ambos."
+            pb "Oh, no me gusta mucho tu plan, Nikki."
+            hide pablo sorprendido with dissolve
+            play sound "sfx/toma pocion.opus"
+            show pocion mini at truecenter
+            with dissolve
+            pause 0.25
+            show pocion vacia at truecenter
+            with dissolve
+            "¡Tomaste la poción de miniatura! Te estás volviendo pequeño..."
+            hide pocion vacia with dissolve
+            show pablo nose2 with dissolve
+            pb "Wow, no sabía que se podía hacer eso..."
+            $ mini = True
+            jump entradacueva
         else:
             scene bgbosquecreepy
-            show pablo nose with dissolve
-            pb "Deberíamos juntarnos mas seguido."
-            hide pablo nose with dissolve
+            show pablo sorprendido with dissolve
+            pb "Oh, Nikki ¿Por qué estas solo en esta zona?"
+            n "Te podría preguntar lo mismo."
+            hide pablo sorprendido
+            show pablo mirando
+            pb "Esta es mi tarea de hoy... {size=35}y de casi siempre.{/size}"
+            hide pablo mirando with dissolve
             jump bosquecreepy
-
-    if "mini" in items:
-        scene bgbosquecreepy
-        show pablo with dissolve
-        nc "Tengo una forma de entrar."
-        pb "¿Cómo?"
-        hide pablo
-        show pablo sorprendido
-        nt "Voy a tomar una poción que me va a hacer pequeño y vos me vas a llevar en tu bolsillo."
-        pb "?"
-        hide pablo sorprendido with dissolve
-        show pocion mini at truecenter
-        with dissolve
-        pause 0.25
-        show pocion vacia at truecenter
-        with dissolve
-        "¡Tomaste la poción de miniatura! Te estás volviendo pequeño..."
-        hide pocion vacia with dissolve
-        show pablo nose2 with dissolve
-        pb "Wow, no sabía que se podía hacer eso..."
-        $ mini = True
-
-    else:
-        scene bgbosquecreepy
-        show pablo sorprendido with dissolve
-        pb "Nikki... No esperaba verte por estos lados."
-        np "El General me quiso atacar"
-        hide pablo sorprendido
-        show pablo enojado
-        pb "Ya sabía que era malvado... Y vos no viste lo que hacen en la cueva..."
-        jump bosquecreepy
 
 label entradacueva:
     if mini:
         call screen entradacueva
     else:
-        scene bgbosquecreepy
-        show pablo nose with dissolve
-        pb "Nikki... No vayas, te van a capturar."
-        hide pablo nose with dissolve
-        jump bosquecreepy
+        if "amuleto3" in items:
+            scene bgbosquecreepy
+            show pablo nose with dissolve
+            pb "Yo que vos esperaría a que disipe el humo, podría ser peligroso..."
+            hide pablo nose with dissolve
+            jump bosquecreepy
+        else:
+            scene bgbosquecreepy
+            show pablo nose with dissolve
+            pb "Nikki... No vayas, te van a capturar."
+            hide pablo nose with dissolve
+            jump bosquecreepy
 
 label bosquezorros:
-    if "amuleto1" in items and "amuleto2" in items and "amuleto3" in items:
-        if carta == 'diablo':
-            scene bgbosquezorros
-            show lirio at left with dissolve
-            show titan with dissolve
-            show vanesa at right with dissolve
-            zt "Un conejo infiltrado."
-            n "Ya no soy un soldado."
-            zv "Un conejo desertor, patético. No podemos arriesgarnos..."
-            nm "¡Por favor, no!"
-            show black with dissolve
-            jump peorfinal
+    if carta == 'diablo':
+        play music "Muusica final malo maloso.opus"
+        scene bgbosquezorros
+        show lirio at left with dissolve
+        show titan with dissolve
+        show vanesa at right with dissolve
+        zt "Un conejo infiltrado."
+        n "Ya no soy un soldado."
+        zv "Un conejo desertor, patético. No podemos arriesgarnos..."
+        nm "¡Por favor, no!"
+        show black with dissolve
+        jump peorfinal
                     
-        if carta == 'muerte':
-            scene bgbosquezorros
-            show toby2 with dissolve
-            tb "No deberías estar en esta zona, Nikki."
-            nc "¿Toby? Conseguiste, ayuda, que bueno."
-            hide toby2
-            show toby tierno
-            tb "No se puede pedir menos, tenemos un gran médico."
-            nd "¿No deberías estar en reposo?"
-            tb "Jeje, digamos que tengo asuntos pendientes."
-            n "¿Qué asuntos?"
-            hide toby tierno
-            show toby guinio
-            tb "Salir de esta isla maldita es uno."
-            n "¿Cómo?"
-            hide toby guinio
-            show toby mirando
-            tb "¡Seguime!"
-            hide toby mirando with dissolve
-            show black with dissolve
-            jump finalbueno
+    if carta == 'muerte':
+        play music "Scene8- Final Bueno_.ogg" volume 0.3 fadein 1.0
+        scene bgbosquezorros
+        show toby2 with dissolve
+        tb "No deberías estar en esta zona, Nikki."
+        nc "¿Toby? Conseguiste ayuda, que bueno."
+        hide toby2
+        show toby tierno
+        tb "No se puede pedir menos, tenemos un gran médico."
+        nd "¿No deberías estar en reposo?"
+        tb "Jeje, digamos que tengo asuntos pendientes."
+        n "¿Qué asuntos?"
+        hide toby tierno
+        show toby guinio
+        tb "Salir de esta isla maldita es uno."
+        n "¿Cómo?"
+        hide toby guinio
+        show toby mirando
+        tb "¡Seguime!"
+        hide toby mirando with dissolve
+        show black with dissolve
+        jump finalbueno
 
-        if carta == 'torre':
-            call screen bosquezorros
+    if carta == 'torre':
+        call screen bosquezorros
 
-        if carta == 'carro':
-            call screen bosquezorros
-    else:
-        if "amuleto2" in items:
-            scene arroyo2
-            "Ese es territorio de zorros, mejor evitar esa zona..."
-            jump arroyo1
-        else:
-            scene bgarroyovacio
-            "Ese es territorio de zorros, mejor evitar esa zona..."
-            jump arroyo1
+    if carta == 'carro':
+        play music "Scene8- Final Bueno_.ogg" volume 0.3 fadein 1.0
+        scene bgbosquezorros
+        show toby2 with dissolve
+        tb "No deberías estar en esta zona, Nikki."
+        na "Toby, que bueno, llegaste a salvo."
+        hide toby2
+        show toby tierno
+        tb "Si, en una pieza al menos..."
+        hide toby tierno
+        show toby2
+        tb "¿las conseguiste? Las partes del amuleto me refiero."
+        ns "¿Cómo sabés de eso?"
+        hide toby2
+        show toby mirando
+        tb "Seguime"
+        hide toby mirando with dissolve
+        jump madriguera
 
 label campazorros:
+    scene campazorros
+    "Esto está demasiado tranquilo..."
     call screen campazorros
 
 label conejosmusculosos:
@@ -1881,15 +2080,50 @@ label conejosmusculosos:
 
 label cueva1:
     scene cueva1
-    nd "No sabía que el General tenía a los prisioneros trabajando en las minas..."
     show pablo mirando with dissolve
-    pb "Siempre te dije que él es un malvado."
-    n "Pablo, ¿ves ese pedazo de amuleto que está ahí?"
-    hide pablo mirando
-    show pablo sorprendido
-    pb "Si, lo veo. ¿Qué es?"
-    n "Eso no es importante, necesito que me lo alcances."
-    hide pablo sorprendido
+    pb "¿Y ahora que deberíamos hacer?"
+    if tobyMuerto:
+        n " No puedo hacer mucho así, pero necesito esa pieza de amuleto, pero podríamos aprovechar y arruinar algunos planes del General."
+        hide pablo mirando
+        show pablo sorprendido
+        p "¿Cómo?"
+        n "Tus conejitos de mimbre se prenden fuego fácil..."
+        hide pablo sorprendido
+        show pablo enojado
+        p "No... no quiero."
+        n "Pablo, no tenemos muchas opciones."
+        hide pablo enojado
+        show pablo nose
+        p "Lo sé, lo sé."
+        n "Entonces hacelo."
+        hide pablo nose with dissolve
+
+    else:
+        n "No puedo hacer mucho así, pero no podemos dejarlos trabajando así, necesitamos una distracción y así liberarlos."
+        hide pablo mirando
+        show pablo sorprendido
+        p "¿Cómo?"
+        n "No creo que te guste mucho la idea pero... ¿Tenés unos conejitos de mimbre a mano?"
+        hide pablo sorprendido
+        show pablo
+        p "Si..."
+        n "¿Fósforos?"
+        hide pablo
+        show pablo mirando
+        p "Entiendo, no me gusta, pero podemos intentar..."
+        hide pablo mirando with dissolve
+    
+    show conejito de mimbre at truecenter with dissolve
+    show fosforo1 at Transform(xpos=1235, ypos=425)
+    $renpy.pause()
+    hide fosforo1
+    show fosforo2 at move_fosforo
+    pause 1.5
+    show cueva3 with dissolve
+    z "¡Se esta prendiendo fuego todo! ¡Aprovechemos para huir!"
+    hide cueva3
+    show cueva4
+    play sound "sfx/Mystery.ogg"
     show amuleto3 at truecenter with dissolve
     "Un pedazo de amuleto, ¿dónde estarán el resto?"
     hide amuleto3 with dissolve
@@ -1897,19 +2131,9 @@ label cueva1:
     pb "¿Para qué es eso, Nikki?"
     ng "Después te digo..."
     hide pablo nose2 with dissolve
+    hide cueva4
     $ items.append("amuleto3")
     jump bosquecreepy
-
-label madriguera:
-    if carta == 'torre':
-        scene campazorros
-        show black with dissolve
-        jump finalmalo
-
-    if carta == 'carro':
-        scene campazorros
-        show black with dissolve
-        jump mejorfinal
 
 label playa2:
     stop bgs fadeout 1.0
@@ -1980,6 +2204,7 @@ label volarlarepresa:
         scene represa2
         hide bomba with dissolve
         "Hay algo en la tierra..."
+        play sound "sfx/Mystery.ogg"
         show amuleto2 at truecenter with dissolve
         "Un pedazo de amuleto, ¿dónde estarán los otros?"
         hide amuleto2 with dissolve
@@ -2009,6 +2234,7 @@ label campa2:
         else:
             scene bgbosquesoleado2
             with None
+            play sound "sfx/toma pocion.opus"
             show pocion invisibilidad at truecenter
             with dissolve
             pause 0.25
@@ -2062,16 +2288,64 @@ label carpagral:
     call screen carpagral
 
 label cajafuerte:
-    show cajafuerte
-    $ renpy.pause()
     if "amuleto1" not in items:
-        show cajaabierta
-        show amuleto1 at truecenter
-        "Un pedazo de amuleto, ¿dónde estará el resto?"
-        hide amuleto1
-        hide cajaabierta
-        $ items.append("amuleto1")
+        call screen safe_screen
+    show cajaabierta
+    $renpy.pause()
+    jump carpagral
+
+label rotate_dial:
+    if dial_step == 0:
+        $ dial_step = 1
+        jump dial_turn1
+    elif dial_step == 1:
+        $ dial_step = 2
+        jump dial_turn2
+    elif dial_step == 2:
+        $ dial_step = 0
+        jump dial_turn3
+
+label dial_turn1:
+    hide screen safe_screen
+    show cajafuerte
+    show dial_turn1
+    play sound "sfx/CAJA-FUERTE.ogg"
+    pause 0.5
+    hide dial_turn1
     hide cajafuerte
+    jump cajafuerte
+
+label dial_turn2:
+    hide screen safe_screen
+    show cajafuerte
+    show dial_turn2
+    play sound "sfx/CAJA-FUERTE.ogg"
+    pause 0.5
+    hide dial_turn2
+    hide cajafuerte
+    jump cajafuerte
+
+label dial_turn3:
+    hide screen safe_screen
+    show cajafuerte
+    show dial_turn3
+    play sound "sfx/CAJA-FUERTE.ogg"
+    pause 0.5
+    hide dial_turn3
+    hide cajafuerte
+    jump cajaabierta
+
+label cajaabierta:
+    play sound "sfx/Open3.ogg"
+    show cajaabierta
+    pause 0.25
+    play music "sfx/Mystery.ogg"
+    show amuleto1 at truecenter with dissolve
+    "Un pedazo de amuleto, ¿dónde estará el resto?"
+    hide amuleto1
+    hide cajaabierta
+    stop music
+    $ items.append("amuleto1")
     jump carpagral
 
 label gralobjetos:
@@ -2091,18 +2365,77 @@ label archivos:
     hide archivo
     jump gralobjetos
 
+label madriguera:
+    if carta == 'torre':
+        scene madriguera
+        "¿Y los zorros? El lugar está completamente vacío..."
+        "Tal vez ya no se encuentran acá,  ¿Tal vez huyeron? Pero, ¿a dónde?"
+        show black with dissolve
+        show 3b with dissolve
+        play music "Final-bueno.ogg" volume 0.3 fadein 1.0
+        "El campamento fue levantado ¿Qué está pasando?"
+        show black with dissolve
+        show 23 with dissolve
+        "No puede ser, todos se fueron sin mi, ¿Qué hago ahora?"
+        jump finalmalo
+
+    if carta == 'carro':
+        stop music fadeout 1.0
+        show campazorros with dissolve
+        show toby mirando with dissolve
+        np "¿Por qué me trajiste hasta acá?"
+        tb "Ya vas a ver..."
+        hide toby mirando with dissolve
+        show black with dissolve
+        show madriguera with dissolve
+        show general federico with dissolve
+        gf "Así que vos sos el famoso Nikki, no es habitual encontrar a alguien como vos en estos tiempos."
+        nd "La apatía no es algo que se me dé bien, señor."
+        gf " Justo lo que quería escuchar. Que gran viaje tuviste, aquél que será, pero ya esta llegando a su fin."
+        np "¿Conoce a Luna?"
+        gf "¿Así es como la llamas? Bastante adecuado supongo."
+        gf "Pero bueno, ya es tiempo, hiciste bien muchacho, tomá esto y dáselo a ella."
+        hide general federico with dissolve
+        play sound "sfx/Mystery.ogg"
+        play music "Ship1-Cuando rompe la presa_.ogg" volume 0.3
+        show amuleto4 at truecenter with dissolve
+        na "¡Si, señor!"
+        hide amuleto4 with dissolve
+        show black with dissolve
+        jump mejorfinal
+
 label peorfinal:
-    "El peor final"
+    show peorfinal with dissolve
+    $renpy.pause()
+    show peorfinal2 with dissolve
+    show text "{font=Inclitodo.ttf}{size=50}{color=#ffffff}El Diablo{/color}{/size}{/font}" as t1 at Transform(xpos=1180, ypos=330)
+    show text "{color=#ffffff}¿Podrás acaso enmendar lo rasgado?\n¿Tiene salvación tu contaminado corazón?{/color}" as t2 at Transform(xpos=1180, ypos=500)
+    $renpy.pause()
     return
 
 label finalmalo:
-    "El final malo"
+    show finalmalo with dissolve
+    $renpy.pause()
+    show finalmalo2 with dissolve
+    show text "{font=Inclitodo.ttf}{size=50}{color=#ffffff}La Torre{/color}{/size}{/font}" at Transform(xpos=1180, ypos=330)
+    show text "{color=#ffffff}En un solitario camino has sellado tu destino.\nTu falta se nota.{/color}" as t2 at Transform(xpos=1180, ypos=500)
+    $renpy.pause()
     return
 
 label finalbueno:
-    "El final bueno"
+    show finalbueno with dissolve
+    $renpy.pause()
+    show finalbueno2 with dissolve
+    show text "{font=Inclitodo.ttf}{size=50}{color=#ffffff}La Muerte{/color}{/size}{/font}" at Transform(xpos=1180, ypos=330)
+    show text "{color=#ffffff}No olvides que tus acciones tienen consecuencias.\nQue tú caos no te frene.{/color}" as t2 at Transform(xpos=1180, ypos=500)
+    $renpy.pause()
     return
 
 label mejorfinal:
-    "El mejor final"
+    show mejorfinal with dissolve
+    $renpy.pause()
+    show mejorfinal2 with dissolve
+    show text "{font=Inclitodo.ttf}{size=50}{color=#ffffff}La Carroza{/color}{/size}{/font}" at Transform(xpos=1180, ypos=330)
+    show text "{color=#ffffff}A favor tuyo se encuentra el mundo.\nTu constancia y la pureza de tu alma\ntraen luz a tu paso al avanzar.{/color}" as t2 at Transform(xpos=1180, ypos=500)
+    $renpy.pause()
     return
