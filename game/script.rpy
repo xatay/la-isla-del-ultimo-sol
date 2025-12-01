@@ -831,7 +831,7 @@ screen bombayarchivos():
         ypos 0
         xsize 240
         ysize 1080
-        action Return("carpagral")
+        action Jump("carpagral")
     imagebutton:
         idle "transparent"
         hover "transparent"
@@ -839,7 +839,7 @@ screen bombayarchivos():
         ypos 0
         xsize 285
         ysize 1080
-        action Return("carpagral")
+        action Jump("carpagral")
 
 screen safe_screen():
 
@@ -875,6 +875,24 @@ screen safe_screen():
             xsize 100
             ysize 95
             action Jump("rotate_dial")
+
+    imagebutton:
+        idle "transparent"
+        hover "transparent"
+        xpos 0
+        ypos 0
+        xsize 440
+        ysize 1080
+        action Return("carpagral")
+
+    imagebutton:
+        idle "transparent"
+        hover "transparent"
+        xpos 1500
+        ypos 0
+        xsize 420
+        ysize 1080
+        action Return("carpagral")
 
 label start:
     $ items = [] 
@@ -2282,16 +2300,16 @@ label carpagral:
         tf "Ese conejo impertinente..."
         hide teniente felipe with dissolve
         $ felipeQueja = True
-    stop bgs fadeout 1.0
-    play bgs "bgs/Carpa Gral.opus" fadein 1.0
     $ bgs_started = False
+    play bgs "bgs/Carpa Gral.opus" fadein 1.0
     call screen carpagral
 
 label cajafuerte:
     if "amuleto1" not in items:
         call screen safe_screen
-    show cajaabierta
-    $renpy.pause()
+    else:
+        show cajaabierta
+        $renpy.pause()
     jump carpagral
 
 label rotate_dial:
@@ -2346,6 +2364,7 @@ label cajaabierta:
     hide cajaabierta
     stop music
     $ items.append("amuleto1")
+    stop bgs fadeout 1.0
     jump carpagral
 
 label gralobjetos:
